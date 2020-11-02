@@ -373,13 +373,27 @@ function touchStarted() {
   }
 }
 
-// キー入力で呼び出す
+let userTypedMessage =null;
 function keyTyped() {
+  // console.log("keytyped");
   if(isPlayScreen == true){
+  //  let userTypedMessage = new Message1(key);
+  //  userTypedMessage.draw();
+  text('Loading', width / 2, height / 2);
+  console.log(key);
+
+
     // walk1Sound.play();
     // walk1Sound.amp(0.1);
-    animations.push(new AnimationType(key));
-    colorList(floor(random(360)), 100);
+ 
+    if (userTypedMessage === null) {
+      userTypedMessage =new AnimationType(key);
+      animations.push(userTypedMessage);
+    } else {
+      userTypedMessage.myMessage = userTypedMessage.myMessage + key;
+    }
+
+    // colorList(floor(random(360)), 100);
   }
 }
 
@@ -1012,13 +1026,13 @@ class AnimationRight {
 }
 
 class AnimationType {
-  constructor(inputKey) {
+  constructor(inputMessage) {
     this.alpha = random(50);
     this.switch = 0;
-    this.lifetime = 200;
+    this.lifetime = 2000;
     this.d = 0;
-    this.p = createVector(random(width), random(height));
-    this.myKey = inputKey;
+    this.p = createVector(width/2, height/2);
+    this.myMessage = inputMessage;
   }
   draw() {
     if(this.switch == 0 && this.alpha < 100){
@@ -1028,11 +1042,11 @@ class AnimationType {
       this.switch = 1;
     }
 
-    if(this.switch == 1 && this.alpha > 0){
-      this.alpha--;
-    }else if(this.switch == 1 && this.alpha <= 0){
-      this.alpha = 0;
-    }
+    // if(this.switch == 1 && this.alpha > 0){
+    //   this.alpha--;
+    // }else if(this.switch == 1 && this.alpha <= 0){
+    //   this.alpha = 0;
+    // }
     this.d++;
     this.lifetime--;
 
@@ -1040,7 +1054,7 @@ class AnimationType {
     shapeCol.setAlpha(this.alpha);
     fill(shapeCol);
     textSize(this.d);
-    text(this.myKey,this.p.x, this.p.y);
+    text(this.myMessage,this.p.x, this.p.y);
   }
 }
 
