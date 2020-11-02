@@ -1,9 +1,9 @@
 // サウンドの変数
-let bgmSound;
-let drop1Sound, drop2Sound, drop3Sound;
-let suzu1Sound,suzu2Sound, suzu3Sound;
-let mokumokuSound, basabasa1Sound, basabasa2Sound;
-let walk1Sound, walk2Sound;
+// let bgmSound;
+// let drop1Sound, drop2Sound, drop3Sound;
+// let suzu1Sound,suzu2Sound, suzu3Sound;
+// let mokumokuSound, basabasa1Sound, basabasa2Sound;
+// let walk1Sound, walk2Sound;
 
 // ローディングの変数
 let isLoading = false;
@@ -39,14 +39,16 @@ let bkCol, shapeCol, txtCol;
 // メッセージ
 let input = 3;
 let messageList = [
-  'En to Oto.',
-  'It is an interactive creation using p5.js.',
-  'Tap the screen. It will begin to draw some circle animations with sound.',
-  'If you are using a PC, try typing on the keyboard as well.',
-  'created by @nasana_x',
-  'Welcome to this site.',
-  'The title is based on the Japanese.',
-  '"En" means circle.',
+  'Where do you keep your laughter when you are not using it?',
+  'How do you know what you think?',
+  'Why are you angry',
+  'What do you hear when you listen to your voice?',
+  'Where do you hide your secrets',
+  'Who are trying to impress?',
+  'tap the screen.',
+  '...............',
+  'when you follow your attention, where does it take you? ',
+  , '...............',
   'It is probably the first shape most people will draw in P5.js.',
   '"Oto" means sound.',
   'The Japanese word "En" also means chance or connection or something like that.',
@@ -65,19 +67,19 @@ function loadAsset() {
   // フォント
   textFont('Poiret One');
   
-  // サウンド
-  bgmSound = loadSound('data/quiet-room-1.mp3', assetLoaded);
-  drop1Sound = loadSound('data/drop1.mp3', assetLoaded);
-  drop2Sound = loadSound('data/drop2.mp3', assetLoaded);
-  drop3Sound = loadSound('data/drop3.mp3', assetLoaded);
-  suzu1Sound = loadSound('data/suzu1.mp3', assetLoaded);
-  suzu2Sound = loadSound('data/suzu2.mp3', assetLoaded);
-  suzu3Sound = loadSound('data/suzu3.mp3', assetLoaded);
-  mokumokuSound = loadSound('data/mokumoku.mp3', assetLoaded);
-  basabasa1Sound = loadSound('data/basabasa1.mp3', assetLoaded);
-  basabasa2Sound = loadSound('data/basabasa2.mp3', assetLoaded);
-  walk1Sound = loadSound('data/walk1.mp3', assetLoaded);
-  walk2Sound = loadSound('data/walk2.mp3', assetLoaded);
+  // // サウンド
+  // bgmSound = loadSound('data/quiet-room-1.mp3', assetLoaded);
+  // drop1Sound = loadSound('data/drop1.mp3', assetLoaded);
+  // drop2Sound = loadSound('data/drop2.mp3', assetLoaded);
+  // drop3Sound = loadSound('data/drop3.mp3', assetLoaded);
+  // suzu1Sound = loadSound('data/suzu1.mp3', assetLoaded);
+  // suzu2Sound = loadSound('data/suzu2.mp3', assetLoaded);
+  // suzu3Sound = loadSound('data/suzu3.mp3', assetLoaded);
+  // mokumokuSound = loadSound('data/mokumoku.mp3', assetLoaded);
+  // basabasa1Sound = loadSound('data/basabasa1.mp3', assetLoaded);
+  // basabasa2Sound = loadSound('data/basabasa2.mp3', assetLoaded);
+  // walk1Sound = loadSound('data/walk1.mp3', assetLoaded);
+  // walk2Sound = loadSound('data/walk2.mp3', assetLoaded);
   
   // 音がロードされたらカウンターを増やす
   function assetLoaded() {
@@ -212,8 +214,8 @@ function introduction(){
   if(isTapped == false && txtAlpha > 0){
     txtAlpha-= 5;
     // 音を流す
-    bgmSound.loop();
-    bgmSound.amp(0.2);
+    // bgmSound.loop();
+    // bgmSound.amp(0.2);
 
   }else if(isTapped == false && txtAlpha < 0){
     txtAlpha = 0;
@@ -254,40 +256,40 @@ function touchStarted() {
     colorList(0, 0);
     // 上部をクリックしたときのアニメーション
     if(mouseY < height / 10){
-      suzu2Sound.play();
-      suzu2Sound.amp(0.1);
+      // suzu2Sound.play();
+      // suzu2Sound.amp(0.1);
       for(let i = 0; i < 30; i++){
         animations.push(new AnimationTop(i));
       }
     }
     // 下部をクリックしたときのアニメーション
     else if(mouseY > height / 10 * 9){
-      mokumokuSound.play();
-      mokumokuSound.amp(0.1);
+      // mokumokuSound.play();
+      // mokumokuSound.amp(0.1);
       for(let i = 0; i < 10; i++){
         animations.push(new AnimationBottom(mouseX, i));
       }
     }
     // 左端をクリックしたときのアニメーション
     else if(mouseX < width / 10){
-      basabasa2Sound.play();
-      basabasa2Sound.amp(0.2);
+      // basabasa2Sound.play();
+      // basabasa2Sound.amp(0.2);
       for(let i = 0; i < 20; i++){
         animations.push(new AnimationLeft(i));
       }
     }
     // 右端をクリックしたときのアニメーション
     else if(mouseX > width / 10 * 9){
-      basabasa1Sound.play();
-      basabasa1Sound.amp(0.2);
+      // basabasa1Sound.play();
+      // basabasa1Sound.amp(0.2);
       for(let i = 0; i < 5; i++){
         animations.push(new AnimationRight(i));
       }
     }
     // 中央を押したとき
     else if (mouseX > width / 2 - 10 && mouseX < width / 2 + 10 && mouseY > height / 2 - 10 &&  mouseY < height / 2 + 10){
-      drop3Sound.play();
-      drop3Sound.amp(0.1);
+      // drop3Sound.play();
+      // drop3Sound.amp(0.1);
       for(let i = 0; i < 10; i++){
         random(2)>1?
         animations.push(new AnimationCenter1(i)):
@@ -299,73 +301,73 @@ function touchStarted() {
     randomNumber = floor(random(11));
 
       if (randomNumber == 0) {
-        drop1Sound.play();
-        drop1Sound.amp(0.1);
+        // drop1Sound.play();
+        // drop1Sound.amp(0.1);
         for(let i = 0; i < 3; i++){
           animations.push(new AnimationTouch0(mouseX, mouseY, i));
         }
       }
       else if (randomNumber == 1) {
-        drop3Sound.play();
-        drop3Sound.amp(0.1);
+        // drop3Sound.play();
+        // drop3Sound.amp(0.1);
         for(let i = 0; i < 10; i++){
           animations.push(new AnimationTouch1(mouseX, mouseY));
         }
       }
       else if (randomNumber == 2) {
-        drop2Sound.play();
-        drop2Sound.amp(0.1);
+        // drop2Sound.play();
+        // drop2Sound.amp(0.1);
         for(let i = 0; i < 3; i++){
           animations.push(new AnimationTouch2(mouseX, mouseY, i));
         }
       }
       else if (randomNumber == 3) {
-        basabasa1Sound.play();
-        basabasa1Sound.amp(0.2);
+        // basabasa1Sound.play();
+        // basabasa1Sound.amp(0.2);
         animations.push(new AnimationTouch3());
       }
       else if (randomNumber == 4) {
-        walk2Sound.play();
-        walk2Sound.amp(0.1);
+        // walk2Sound.play();
+        // walk2Sound.amp(0.1);
         animations.push(new AnimationTouch4(mouseY));
       }
       else if (randomNumber == 5) {
-        suzu1Sound.play();
-        suzu1Sound.amp(0.1);
+        // suzu1Sound.play();
+        // suzu1Sound.amp(0.1);
         let n = random(50, 200);
         for(let i = 0; i < 5; i++){
         animations.push(new AnimationTouch5(mouseX, mouseY, i, n));
         }
       }
       else if (randomNumber == 6) {
-        suzu2Sound.play();
-        suzu2Sound.amp(0.1);
+        // suzu2Sound.play();
+        // suzu2Sound.amp(0.1);
         for(let i = 0; i < 20; i++){
           animations.push(new AnimationTouch6(mouseX, mouseY, i));
         }
       }
       else if (randomNumber == 7) {
-        suzu3Sound.play();
-        suzu3Sound.amp(0.1);
+        // suzu3Sound.play();
+        // suzu3Sound.amp(0.1);
         for(let i = 0; i < 10; i++){
           animations.push(new AnimationTouch7(mouseX, mouseY, i));
         }
       }
       else if (randomNumber == 8) {
-        walk2Sound.play();
-        walk2Sound.amp(0.1);
+        // walk2Sound.play();
+        // walk2Sound.amp(0.1);
         animations.push(new AnimationTouch8(mouseX));
       }
       else if (randomNumber == 9) {
-        drop1Sound.play();
-        drop1Sound.amp(0.1);
+        // drop1Sound.play();
+        // drop1Sound.amp(0.1);
         for(let i = 0; i <10; i++){
           animations.push(new AnimationTouch9());
         }
       }
       else if (randomNumber == 10) {
-        basabasa1Sound.play();
-        basabasa1Sound.amp(0.2);
+        // basabasa1Sound.play();
+        // basabasa1Sound.amp(0.2);
         animations.push(new AnimationTouch10());
       }
   }
@@ -374,8 +376,8 @@ function touchStarted() {
 // キー入力で呼び出す
 function keyTyped() {
   if(isPlayScreen == true){
-    walk1Sound.play();
-    walk1Sound.amp(0.1);
+    // walk1Sound.play();
+    // walk1Sound.amp(0.1);
     animations.push(new AnimationType(key));
     colorList(floor(random(360)), 100);
   }
