@@ -1,9 +1,11 @@
-// サウンドの変数
+
+
 // let bgmSound;
 // let drop1Sound, drop2Sound, drop3Sound;
 // let suzu1Sound,suzu2Sound, suzu3Sound;
 // let mokumokuSound, basabasa1Sound, basabasa2Sound;
 // let walk1Sound, walk2Sound;
+
 
 // ローディングの変数
 let isLoading = false;
@@ -78,6 +80,13 @@ let messageList = [
   'Dont think about it',
 ];
 
+let socket = io();
+socket.on("connect",()=>{
+  console.log('connected!');
+})
+
+
+
 function loadAsset() {
   // フォント
   textFont('Poiret One');
@@ -106,10 +115,10 @@ function loadAsset() {
 }
 
 function setup(){
-  // キャンバスを画面いっぱいにする
+
   createCanvas(windowWidth, windowHeight);
 
-  // 解像度
+
   pixelDensity(2);
   
   // 色の計算方法をHSB（色相、彩度、明度、透明度）にする
@@ -131,7 +140,13 @@ function setup(){
 
   // 色のリストを読み込む
   colorList(0, 0);
+socket.on("data",(data)=>{
+  console.log("key: "+data["key"]);
+})
+
 }
+
+
 // txt = intro font color, shapeCol = automated shapes and font, goldCol=user text
 function colorList(H, S) {
   bkCol = color(0, 0, 8);
@@ -404,7 +419,7 @@ function keyTyped() {
   //  let userTypedMessage = new Message1(key);
   //  userTypedMessage.draw();
   text('Loading', width / 2, height / 2);
-  console.log(key);
+ socket.emit("data", {key:key});
 
 
     // walk1Sound.play();
