@@ -34,20 +34,35 @@ let animations = [];
 let messages = [];
 
 // 色
-let bkCol, shapeCol, txtCol;
+let bkCol, shapeCol, goldCol, txtCol;
 
 // メッセージ
 let input = 3;
 let messageList = [
+//  'How do you know what you think?',
+'where is your attention ',
+'',
+'',
+'can you watch it?',
+'tap the screen',
+'How do you know what you think?',
+'Where does a new thought come from?',
+'When does an old thought end?',
+'Can you catch it?',
+'who chose the thoughts are you thinking right now?',
+'tap the screen',
+
+'What do you hear when you listen to your voice?',
   'Where do you keep your laughter when you are not using it?',
-  'How do you know what you think?',
-  'Why are you angry',
-  'What do you hear when you listen to your voice?',
+
+  'Why are you angry?',
+ 'why are you angry?',
+ 'why are you angry?',
   'Where do you hide your secrets',
   'Who are trying to impress?',
-  'tap the screen.',
+  
   '...............',
-  'when you follow your attention, where does it take you? ',
+
   , '...............',
   'It is probably the first shape most people will draw in P5.js.',
   '"Oto" means sound.',
@@ -59,8 +74,8 @@ let messageList = [
   'Try tapping on the Left or Right.',
   'Try tapping on the Center.',
   'If you type the "ESC" key, to save Canvas',
-  'Simplicity will inspire you to be creative.',
-  'Enjoy!'
+  'Why did you tap the screen?',
+  'Dont think about it',
 ];
 
 function loadAsset() {
@@ -117,11 +132,15 @@ function setup(){
   // 色のリストを読み込む
   colorList(0, 0);
 }
-
+// txt = intro font color, shapeCol = automated shapes and font, goldCol=user text
 function colorList(H, S) {
   bkCol = color(0, 0, 8);
-  shapeCol = color(H, S, 100);
-  txtCol = color(H, S, 100);
+ // shapeCol = color(H, S, 100);
+ shapeCol = color('gold');
+  goldCol = color(20, 170, 5);
+  // txtCol = color(H, S, 100);
+  txtCol = color('beige');
+
 }
 
 function sizeList() {
@@ -297,15 +316,18 @@ function touchStarted() {
         }
       }
     
-    // マウスを1回クリックしたときのアニメーション（ランダム）
+   
     randomNumber = floor(random(11));
-
+    // for(let i = 0; i < 3; i++){
+    //   animations.push(new AnimationTouch0(mouseX, mouseY, i));
+    // }
       if (randomNumber == 0) {
         // drop1Sound.play();
         // drop1Sound.amp(0.1);
         for(let i = 0; i < 3; i++){
           animations.push(new AnimationTouch0(mouseX, mouseY, i));
         }
+
       }
       else if (randomNumber == 1) {
         // drop3Sound.play();
@@ -369,7 +391,9 @@ function touchStarted() {
         // basabasa1Sound.play();
         // basabasa1Sound.amp(0.2);
         animations.push(new AnimationTouch10());
+  
       }
+      console.log("new AnimationTouch"+randomNumber)
   }
 }
 
@@ -1051,8 +1075,8 @@ class AnimationType {
     this.lifetime--;
 
     noStroke();
-    shapeCol.setAlpha(this.alpha);
-    fill(shapeCol);
+    goldCol.setAlpha(this.alpha);
+    fill(goldCol);
     textSize(this.d);
     text(this.myMessage,this.p.x, this.p.y);
   }
