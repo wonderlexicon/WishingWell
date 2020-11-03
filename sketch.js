@@ -42,11 +42,25 @@ let bkCol, shapeCol, goldCol, txtCol;
 let input = 3;
 let messageList = [
 //  'How do you know what you think?',
-'where is your attention ',
-'',
-'',
-'can you watch it?',
+"where does your mind go when it wanders?",
+"try to follow it here.",
+'can you catch it?',
+"tap around the screen or type in your response to the prompts",
+"where is your mind now?",
+'how often are you in ecstasy?',
+'can you find temper in the place where you lose it?',
+"are forgotten memories less real than dreams you remember? ",
+'what controls your attention?',
+'are you aware of your attention ',
+'how do you know what you know?',
+'do you believe what you see more than what you hear? less or more the same than what you think?',
+'do you think its easier to feel anger than acknowledge fear?',
+'where is its center?',
+'can you see it?',
 'tap the screen',
+'how well do you handle disappointment?',
+'when was the last time you danced in the rain?',
+'when you are all alone in silence where do your thoughts go?',
 'How do you know what you think?',
 'Where does a new thought come from?',
 'When does an old thought end?',
@@ -66,7 +80,7 @@ let messageList = [
   '...............',
 
   , '...............',
-  'It is probably the first shape most people will draw in P5.js.',
+ 
   '"Oto" means sound.',
   'The Japanese word "En" also means chance or connection or something like that.',
   'Try tapping the screen.',
@@ -88,7 +102,7 @@ socket.on("connect",()=>{
 
 
 function loadAsset() {
-  // フォント
+ 
   textFont('Poiret One');
   
   // // サウンド
@@ -105,7 +119,7 @@ function loadAsset() {
   // walk1Sound = loadSound('data/walk1.mp3', assetLoaded);
   // walk2Sound = loadSound('data/walk2.mp3', assetLoaded);
   
-  // 音がロードされたらカウンターを増やす
+
   function assetLoaded() {
     // assetCounter++;
     // if(assetCounter == assetNumber) {
@@ -120,25 +134,24 @@ function setup(){
 
 
   pixelDensity(2);
-  
-  // 色の計算方法をHSB（色相、彩度、明度、透明度）にする
+
   colorMode(HSB, 360, 100, 100, 100);
 
-  // データをロードする
+
   loadAsset();
 
-  // テキストを揃える
+
   textAlign(CENTER);
 
-  // 画面切り替え変数の初期化
+  
   isStarted = false;
   isTapped = true;
   isPlayScreen = false;
 
-  // サイズリストを読み込む
+
   sizeList();
 
-  // 色のリストを読み込む
+
   colorList(0, 0);
 socket.on("data",(data)=>{
   console.log("key: "+data["key"]);
@@ -159,24 +172,24 @@ function colorList(H, S) {
 }
 
 function sizeList() {
-  // サイズの基準
+
   newSize = min(width, height);
-  // テキストサイズ
+
   h1 = newSize * 0.07;
   h2 = h1 * 0.8;
   h3 = h1 * 0.4;
   h4 = h1 * 0.3;
 }
 
-// ウィンドウリサイズ時にキャンバスをウィンドウに合わせる
+
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   sizeList();
 }
 
-// 計算と描画
+
 function draw(){
-  // ローディングアニメーション
+  
   if (isLoading == true) {
     background(bkCol);
     noStroke();
@@ -190,40 +203,38 @@ function draw(){
        0, map(assetCounter, 0, assetNumber-1, 0, TAU));
   }
 
-  // ローディングが終わったら、イントロダクションを読み込む
+
   else if (isLoading == false) {
     introduction();
     isStarted = true;
   }
 
-  // たまにメッセージを表示する
+
   if(isPlayScreen == true && frameCount % 600 == 0){
     input < messageList.length ? input++ : input = 4;
     messages.push(new Message1(input));
   }
 
-  // アニメーションを呼び出す
   if (animations.length > 0) {
-    //アニメーションの数だけくりかえす
+
     for (let i = 0; i < animations.length; i++) {
-      //アニメーションの配列から順番に描く
+   
       push();
       animations[i].draw();
       pop();
-      // アニメーションの寿命がきたら
+   
       if (animations[i].lifetime < 0) {
-        // アニメーションを配列から消す
+     
         animations.splice(i--, 1);
       }
     }
   }
 
-  // メッセージを呼び出す
   if (messages.length > 0) {
     for (let i = 0; i < messages.length ; i++) {
       messages[i].draw();
       if (messages[i].lifetime < 0) {
-        // アニメーションを配列から消す
+     
         messages.splice(i, 1);
       }
     }
@@ -237,7 +248,7 @@ function draw(){
 //  text(messageList[4], width / 2, height / 2 + h1*2);
 }
 
-// イントロダクション
+
 function introduction(){
   if(isTapped == true && txtAlpha < 100){
     txtAlpha++;
@@ -247,7 +258,7 @@ function introduction(){
 
   if(isTapped == false && txtAlpha > 0){
     txtAlpha-= 5;
-    // 音を流す
+
     // bgmSound.loop();
     // bgmSound.amp(0.2);
 
@@ -257,7 +268,7 @@ function introduction(){
 
   background(bkCol);
 
-  // テキストを表示
+
   noStroke();
   textSize(h1);
   txtCol.setAlpha(txtAlpha);
@@ -274,9 +285,9 @@ function introduction(){
 }
 
 
-// タッチしたときに呼び出す
+
 function touchStarted() {
-  // イントロダクションが表示されてるときにクリックしたら切り替える
+
   if(isStarted == true){
     isTapped = false;
   }
@@ -285,10 +296,9 @@ function touchStarted() {
     isPlayScreen = true;
   }
 
-  // プレイスクリーンのときにクリックしたら、ランダムにモード決める
   if(isPlayScreen == true){
     colorList(0, 0);
-    // 上部をクリックしたときのアニメーション
+
     if(mouseY < height / 10){
       // suzu2Sound.play();
       // suzu2Sound.amp(0.1);
@@ -296,7 +306,7 @@ function touchStarted() {
         animations.push(new AnimationTop(i));
       }
     }
-    // 下部をクリックしたときのアニメーション
+ 
     else if(mouseY > height / 10 * 9){
       // mokumokuSound.play();
       // mokumokuSound.amp(0.1);
@@ -304,7 +314,7 @@ function touchStarted() {
         animations.push(new AnimationBottom(mouseX, i));
       }
     }
-    // 左端をクリックしたときのアニメーション
+
     else if(mouseX < width / 10){
       // basabasa2Sound.play();
       // basabasa2Sound.amp(0.2);
@@ -312,7 +322,7 @@ function touchStarted() {
         animations.push(new AnimationLeft(i));
       }
     }
-    // 右端をクリックしたときのアニメーション
+
     else if(mouseX > width / 10 * 9){
       // basabasa1Sound.play();
       // basabasa1Sound.amp(0.2);
@@ -320,7 +330,7 @@ function touchStarted() {
         animations.push(new AnimationRight(i));
       }
     }
-    // 中央を押したとき
+
     else if (mouseX > width / 2 - 10 && mouseX < width / 2 + 10 && mouseY > height / 2 - 10 &&  mouseY < height / 2 + 10){
       // drop3Sound.play();
       // drop3Sound.amp(0.1);
@@ -1131,7 +1141,6 @@ class Message1 {
   }
 }
 
-// キャンバスを動画撮影する
 //function mousePressed() {
 //  if(isRecording == true){
 //    stopRecording();

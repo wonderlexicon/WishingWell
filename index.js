@@ -12,9 +12,12 @@ server.listen(port,() =>{
 
 let io = require("socket.io").listen(server);
 io.sockets.on("connection", (socket)=>{
-    console.log("new client");
+    console.log("new client!!!!"+socket.id);
     socket.on("data",(data)=>{
         console.log("data"+data);
         io.sockets.emit("data",data);
+    });
+    socket.on("disconnect", ()=>{
+        console.log("client disconnected"+socket.id);
     })
 })
