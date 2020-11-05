@@ -1,5 +1,8 @@
 
 
+//QUESTIONS!!! HOW DO I CHANGE THE DEFAULT FLOW OF MESSAGES? WANT TO STOP THE REPETITION OF MESSAGE 1, WANT TO ALTER MESSAGE PLACEMENT - MAKE MESSAGES APPEAR AT DIFFERENT PLACES ON THE CANVAS TO DRAW USER ATTENTION IN DIFFERENT DIRECTIONS. ALSO, HOW DO I PLAY WITH THE PACING AND CHANGE THE RATE OF WHEN MESSAGES SHOW? https://p5js.org/examples/simulate-multiple-particle-systems.html want this at end
+//WHAT IS ANIMATION CENTER?
+
 // let bgmSound;
 // let drop1Sound, drop2Sound, drop3Sound;
 // let suzu1Sound,suzu2Sound, suzu3Sound;
@@ -7,38 +10,34 @@
 // let walk1Sound, walk2Sound;
 
 
-// ローディングの変数
 let isLoading = false;
 let assetNumber = 12;
 let assetCounter = 0;
 
-// アルファ変数
 let alpha = 0;
 let txtAlpha = 0;
 
-//画面切り替え
 let isStarted;
 let isTapped;
 let isPlayScreen;
 
-// モードの管理番号
 let randomNumber;
 
-// サイズ
+
 let newSize;
 let h1, h2, h3, h4;
 
-// 角度
+
 let angle = 0;
 
-// アニメーションの変数
+
 let animations = [];
 let messages = [];
 
-// 色
+
 let bkCol, shapeCol, goldCol, txtCol;
 
-// メッセージ
+
 let input = 3;
 let messageList = [
 //  'How do you know what you think?',
@@ -77,15 +76,15 @@ let messageList = [
   'Where do you hide your secrets',
   'Who are trying to impress?',
   
-  '...............',
+  'type...............',
 
-  , '...............',
+  , '........tap.......',
  
-  '"Oto" means sound.',
-  'The Japanese word "En" also means chance or connection or something like that.',
+  '',
+  '.',
   'Try tapping the screen.',
   'Try typing on the keyboard.',
-  'If you key type, the color changes.',
+  '.',
   'Try tapping on the top or bottom.',
   'Try tapping on the Left or Right.',
   'Try tapping on the Center.',
@@ -105,7 +104,7 @@ function loadAsset() {
  
   textFont('Poiret One');
   
-  // // サウンド
+
   // bgmSound = loadSound('data/quiet-room-1.mp3', assetLoaded);
   // drop1Sound = loadSound('data/drop1.mp3', assetLoaded);
   // drop2Sound = loadSound('data/drop2.mp3', assetLoaded);
@@ -331,21 +330,25 @@ function touchStarted() {
       }
     }
 
-    else if (mouseX > width / 2 - 10 && mouseX < width / 2 + 10 && mouseY > height / 2 - 10 &&  mouseY < height / 2 + 10){
-      // drop3Sound.play();
-      // drop3Sound.amp(0.1);
-      for(let i = 0; i < 10; i++){
-        random(2)>1?
-        animations.push(new AnimationCenter1(i)):
-        animations.push(new AnimationCenter2(i));
-        }
-      }
+//ANIMATION CENTER?
+    // else if (mouseX > width / 2 - 10 && mouseX < width / 2 + 10 && mouseY > height / 2 - 10 &&  mouseY < height / 2 + 10){
+    //   // drop3Sound.play();
+    //   // drop3Sound.amp(0.1);
+    //   for(let i = 0; i < 10; i++){
+    //     random(2)>1?
+    //     animations.push(new AnimationCenter1(i)):
+    //     animations.push(new AnimationCenter2(i));
+    //     }
+    //   }
     
    
     randomNumber = floor(random(11));
+
+    //ANIMATION0
     // for(let i = 0; i < 3; i++){
     //   animations.push(new AnimationTouch0(mouseX, mouseY, i));
     // }
+
       if (randomNumber == 0) {
         // drop1Sound.play();
         // drop1Sound.amp(0.1);
@@ -354,6 +357,8 @@ function touchStarted() {
         }
 
       }
+
+      //ANIMATION1
       else if (randomNumber == 1) {
         // drop3Sound.play();
         // drop3Sound.amp(0.1);
@@ -361,6 +366,8 @@ function touchStarted() {
           animations.push(new AnimationTouch1(mouseX, mouseY));
         }
       }
+
+      //ANIMATION2
       else if (randomNumber == 2) {
         // drop2Sound.play();
         // drop2Sound.amp(0.1);
@@ -368,16 +375,22 @@ function touchStarted() {
           animations.push(new AnimationTouch2(mouseX, mouseY, i));
         }
       }
+
+      //ANIMATION3
       else if (randomNumber == 3) {
         // basabasa1Sound.play();
         // basabasa1Sound.amp(0.2);
         animations.push(new AnimationTouch3());
       }
+
+      //ANIMATION4 
       else if (randomNumber == 4) {
         // walk2Sound.play();
         // walk2Sound.amp(0.1);
         animations.push(new AnimationTouch4(mouseY));
       }
+
+      //ANIMATION 5
       else if (randomNumber == 5) {
         // suzu1Sound.play();
         // suzu1Sound.amp(0.1);
@@ -386,6 +399,7 @@ function touchStarted() {
         animations.push(new AnimationTouch5(mouseX, mouseY, i, n));
         }
       }
+      //ANIMATION 6
       else if (randomNumber == 6) {
         // suzu2Sound.play();
         // suzu2Sound.amp(0.1);
@@ -393,6 +407,8 @@ function touchStarted() {
           animations.push(new AnimationTouch6(mouseX, mouseY, i));
         }
       }
+
+      //ANIMATION7
       else if (randomNumber == 7) {
         // suzu3Sound.play();
         // suzu3Sound.amp(0.1);
@@ -400,11 +416,15 @@ function touchStarted() {
           animations.push(new AnimationTouch7(mouseX, mouseY, i));
         }
       }
+
+      //ANIMATION8
       else if (randomNumber == 8) {
         // walk2Sound.play();
         // walk2Sound.amp(0.1);
         animations.push(new AnimationTouch8(mouseX));
       }
+
+      //ANIMATION9
       else if (randomNumber == 9) {
         // drop1Sound.play();
         // drop1Sound.amp(0.1);
@@ -412,6 +432,8 @@ function touchStarted() {
           animations.push(new AnimationTouch9());
         }
       }
+
+      //ANIMATION10
       else if (randomNumber == 10) {
         // basabasa1Sound.play();
         // basabasa1Sound.amp(0.2);
@@ -448,7 +470,7 @@ function keyTyped() {
 
 function keyPressed() {
   if(keyCode === ESCAPE){
-    saveCanvas('En to Oto.', 'png');
+    saveCanvas('YOU WERE HERE.', 'png');
   }
 }
 
@@ -485,6 +507,7 @@ class AnimationTouch0 {
   }
 }
 
+//ANIMATION 1
 class AnimationTouch1 {
   constructor(x, y) {
     this.alpha = random(50);
@@ -518,6 +541,8 @@ class AnimationTouch1 {
   }
 }
 
+
+//ANIMATION 2
 class AnimationTouch2 {
   constructor(x, y, i) {
     this.alpha = random(50);
@@ -553,6 +578,7 @@ class AnimationTouch2 {
   }
 }
 
+//ANIMATION 3
 class AnimationTouch3 {
   constructor() {
     this.alpha = random(50);
@@ -584,6 +610,8 @@ class AnimationTouch3 {
   }
 }
 
+
+//ANIMATION 4
 class AnimationTouch4 {
   constructor(y) {
     this.alpha = random(50);
@@ -619,6 +647,7 @@ class AnimationTouch4 {
   }
 }
 
+//ANIMATION 5
 class AnimationTouch5 {
   constructor(x, y, i, n) {
     this.alpha = random(50);
@@ -656,6 +685,8 @@ class AnimationTouch5 {
   }
 }
 
+
+//ANIMATION 6
 class AnimationTouch6 {
   constructor(x, y, i) {
     this.alpha = random(50);
@@ -693,6 +724,8 @@ class AnimationTouch6 {
   }
 }
 
+
+//ANIMATION 7
 class AnimationTouch7 {
   constructor(x, y, i) {
     this.alpha = random(50);
@@ -740,6 +773,8 @@ class AnimationTouch7 {
   }
 }
 
+//ANIMATION 8
+
 class AnimationTouch8 {
   constructor(x) {
     this.alpha = random(50);
@@ -775,6 +810,8 @@ class AnimationTouch8 {
     circle(this.p2.x, this.p2.y, this.d);
   }
 }
+
+//ANIMATION 9
 
 class AnimationTouch9 {
   constructor(x) {
@@ -815,6 +852,7 @@ class AnimationTouch9 {
   }
 }
 
+//ANIMATION 10
 class AnimationTouch10 {
   constructor() {
     this.alpha = random(50);
@@ -847,6 +885,7 @@ class AnimationTouch10 {
     circle(this.p.x, this.p.y, this.d);
   }
 }
+
 
 class AnimationCenter1 {
   constructor(i) {
