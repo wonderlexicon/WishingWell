@@ -48,8 +48,8 @@ let messageList = [
 'can you find temper in the place where you lose it?',
 "are forgotten memories less real than dreams you remember? ",
 'what controls your attention?',
-'are you aware of your attention ',
-'how do you know what you know?',
+'are you aware of your attention\'s',
+"'how do you know what you know?'",
 'do you believe what you see more than what you hear? less or more the same than what you think?',
 'do you think its easier to feel anger than acknowledge fear?',
 'where is its center?',
@@ -347,9 +347,11 @@ function touchStarted() {
     //     }
     //   }
     
-   
-    randomNumber = floor(random(11));
+  // GO HERE TO SEE ANIMATION DISTINCTIONS !!!( change from 0-10)
+  randomNumber = 1;
 
+
+    // randomNumber = floor(random(11));
     //ANIMATION0
     // for(let i = 0; i < 3; i++){
     //   animations.push(new AnimationTouch0(mouseX, mouseY, i));
