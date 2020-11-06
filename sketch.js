@@ -38,14 +38,12 @@ let messages = [];
 let bkCol, shapeCol, goldCol, txtCol;
 
 
-let input = 3;
+
+
+
+
 let messageList = [
-//  'How do you know what you think?',
-"where does your mind go when it wanders?",
-"try to follow it here.",
-'can you catch it?',
-"tap around the screen or type in your response to the prompts",
-"where is your mind now?",
+
 'how often are you in ecstasy?',
 'can you find temper in the place where you lose it?',
 "are forgotten memories less real than dreams you remember? ",
@@ -186,7 +184,7 @@ function windowResized() {
   sizeList();
 }
 
-
+let input = -1;
 function draw(){
   
   if (isLoading == true) {
@@ -210,7 +208,7 @@ function draw(){
 
 
   if(isPlayScreen == true && frameCount % 600 == 0){
-    input < messageList.length ? input++ : input = 4;
+    input < messageList.length ? input++ : input = 0;
     messages.push(new Message1(input));
   }
 
@@ -248,6 +246,16 @@ function draw(){
 }
 
 
+  //INTRO TEXT GROUP
+
+let introTextList = [
+  //  'How do you know what you think?',
+  "where does your mind go when it wanders///?",
+  "try to follow it here.",
+  'can you catch it?',
+  "tap around the screen or type in your response to the prompts",
+  "where is your mind now?",]
+
 function introduction(){
   if(isTapped == true && txtAlpha < 100){
     txtAlpha++;
@@ -272,18 +280,16 @@ function introduction(){
   textSize(h1);
   txtCol.setAlpha(txtAlpha);
   fill(txtCol);
-  text(messageList[0], width/2, height/2-h1*2);
+  text(introTextList[0], width/2, height/2-h1*2);
 
   textSize(h3);
-  text(messageList[1], width/2, height/2 );
-  text(messageList[2], width/2, height/2 + h1);
-  text(messageList[3], width/2, height/2 + h1*2);
+  text(introTextList[1], width/2, height/2 );
+  text(introTextList[2], width/2, height/2 + h1);
+  text(introTextList[3], width/2, height/2 + h1*2);
   
   textSize(h4);
-  text(messageList[4], width/2, height/2 + h1*4);
+  text(introTextList[4], width/2, height/2 + h1*4);
 }
-
-
 
 function touchStarted() {
 
@@ -1145,14 +1151,17 @@ class AnimationType {
     text(this.myMessage,this.p.x, this.p.y);
   }
 }
-
+//BOTTOM TXT
 class Message1 {
   constructor(input) {
     this.alpha = 0;
     this.switch = 0;
     this.lifetime = 400;
     this.p = createVector(width / 2, height / 2);
-    this.message = messageList[input];
+    this.topText = messageList[input];
+    this.bottomText = messageList[input+1];
+
+    // this.message = 
   }
   draw() {
     if(this.switch == 0 && this.alpha < 300){
@@ -1173,10 +1182,10 @@ class Message1 {
     shapeCol.setAlpha(this.alpha);
     fill(shapeCol);
     textSize(h2);
-    text(messageList[0],this.p.x, this.p.y - h1);
+    text(this.topText, this.p.x, this.p.y - h1);
     
     textSize(h3);
-    text(this.message,this.p.x, this.p.y + h1);
+    text(this.bottomText,this.p.x, this.p.y + h1);
   }
 }
 
