@@ -190,6 +190,7 @@ function windowResized() {
 }
 
 let input = -1;
+let index = 0;
 function draw(){
   
   if (isLoading == true) {
@@ -214,8 +215,76 @@ function draw(){
 
   if(isPlayScreen == true && frameCount % 600 == 0){
     input < messageList.length ? input++ : input = 0;
+    // messages.push(new MessageCustom("nicoleta", width/2, height/2));
     messages.push(new Message1(input));
   }
+
+  if (isPlayScreen == true){
+    // console.log(frameCount);
+    let textShowTime =1000;
+    if (frameCount == textShowTime){
+      let myText = "simon?"; 
+
+      let textX = 200; 
+      //MAKE SURE TEXT AND TEXT Y ARE > 0
+      // let textX = width/4-200;
+      // let textY = height/4;
+      let textY = 200;
+      let textLifetime = 600;
+      messages.push(new MessageCustom(myText, textX, textY, textLifetime));
+  
+    }
+    // let textShowTime =1000;
+    // if (frameCount == textShowTime){
+    //   let myText = "simon?"; 
+      
+    //   let textX = 200; 
+    //   //MAKE SURE TEXT AND TEXT Y ARE > 0
+    //   // let textX = width/4-200;
+    //   // let textY = height/4;
+    //   let textY = 200;
+    //   let textLifetime = 600;
+    //   messages.push(new MessageCustom(myText, textX, textY, textLifetime));
+  
+  //   }
+  }
+
+
+  
+
+  if(isPlayScreen == true && frameCount % 300 == 0){
+    let myText = messageList[index]; 
+    let textX = random(0, width); 
+    //MAKE SURE TEXT AND TEXT Y ARE > 0
+    // let textX = width/4-200;
+    // let textY = height/4;
+    let textY = random(0, height);
+    let textLifetime = 60;
+    messages.push(new MessageCustom(myText, textX, textY, textLifetime));
+index++;
+  }
+
+
+//random word repeat horizontal line on top (only random x)
+  // if(isPlayScreen == true && frameCount % 10 == 0){
+  //   let myText = "nIcoleta"; 
+  //   let textX = random(0, width); 
+  //   //MAKE SURE TEXT AND TEXT Y ARE > 0
+  //   // let textX = width/4-200;
+  //   let textY = height/4;
+  //   messages.push(new MessageCustom(myText, textX, textY));
+  // }
+
+ //random word repeat x,y
+  // if(isPlayScreen == true && frameCount % 10 == 0){
+  //   let myText = "nIcoleta"; 
+  //   let textX = random(0, width); 
+  //   //MAKE SURE TEXT AND TEXT Y ARE > 0
+  //   // let textX = width/4-200;
+  //   // let textY = height/4;
+  //   let textY = random(0, height);
+  //   messages.push(new MessageCustom(myText, textX, textY));
+  // }
 
   if (animations.length > 0) {
 
@@ -1168,6 +1237,7 @@ class AnimationType {
     text(this.myMessage,this.p.x, this.p.y);
   }
 }
+
 //BOTTOM TXT
 class Message1 {
   constructor(input) {
@@ -1180,24 +1250,32 @@ class Message1 {
 
     // this.message = 
   }
+
+  //
   draw() {
+    //fading in logic for all text other than intro
     if(this.switch == 0 && this.alpha < 300){
       this.alpha++;
+      //after fully faded in, start fading out
     }else if(this.switch == 0 && this.alpha >= 300){
       this.alpha = 100;
       this.switch = 1;
     }
-
+//fading out logic for other than intro 
     if(this.switch == 1 && this.alpha > 0){
       this.alpha --;
     }else if(this.switch == 1 && this.alpha <= 0){
       this.alpha = 0;
     }
+
+    shapeCol.setAlpha(this.alpha);
+    fill(shapeCol);
+    //time text is on screen
     this.lifetime--;
 
     noStroke();
-    shapeCol.setAlpha(this.alpha);
-    fill(shapeCol);
+  
+    //TEXT SIZE
     textSize(h2);
     text(this.topText, this.p.x, this.p.y - h1);
     
@@ -1206,6 +1284,51 @@ class Message1 {
   }
 }
 
+
+//custom message
+class MessageCustom {
+  constructor(text, x, y, lifetime) {
+    this.alpha = 0;
+    this.switch = 0;
+    this.lifetime = lifetime;
+    this.p = createVector(x, y);
+    this.topText = text;
+
+
+    // this.message = 
+  }
+
+  //
+  draw() {
+    //fading in logic for all text other than intro 
+    // TODO: NOTE NEED TO CREATE FADE OUT LOGIC IN PROPORTION WITH CUSTOM LIFETIME VALUE
+    if(this.switch == 0 && this.alpha < 300){
+      this.alpha++;
+      //after fully faded in, start fading out
+    }else if(this.switch == 0 && this.alpha >= 300){
+      this.alpha = 100;
+      this.switch = 1;
+    }
+//fading out logic for other than intro 
+    if(this.switch == 1 && this.alpha > 0){
+      this.alpha --;
+    }else if(this.switch == 1 && this.alpha <= 0){
+      this.alpha = 0;
+    }
+
+    shapeCol.setAlpha(this.alpha);
+    fill(shapeCol);
+    //time text is on screen
+    this.lifetime--;
+
+    noStroke();
+  
+    //TEXT SIZE
+    textSize(h2);
+    text(this.topText, this.p.x, this.p.y - h1);
+
+  }
+}
 //function mousePressed() {
 //  if(isRecording == true){
 //    stopRecording();
