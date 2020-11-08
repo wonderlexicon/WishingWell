@@ -35,15 +35,20 @@ let animations = [];
 let messages = [];
 
 
-let bkCol, shapeCol, goldCol, txtCol;
+let bkCol, shapeCol, goldCol, introTxtCol, circleCol;
 
 
 
 
-
+//CREATE LIST OF POSITIONS ON JAMBOARD
 
 let messageList = [
-
+  'this is a mirror of your mind',
+  "where does your mind go when it wanders?",
+  "try to follow it here.",
+  'can you catch it?',
+  "tap around the screen or type in your response to the prompts",
+  "where is your mind now?",
 'how often are you in ecstasy?',
 'can you find temper in the place where you lose it?',
 "are forgotten memories less real than dreams you remember? ",
@@ -54,7 +59,7 @@ let messageList = [
 'do you think its easier to feel anger than acknowledge fear?',
 'where is its center?',
 'can you see it?',
-'tap the screen',
+'what do you see when you look in the mirror',
 'how well do you handle disappointment?',
 'when was the last time you danced in the rain?',
 'when you are all alone in silence where do your thoughts go?',
@@ -63,33 +68,21 @@ let messageList = [
 'When does an old thought end?',
 'Can you catch it?',
 'who chose the thoughts are you thinking right now?',
-'tap the screen',
-
+'what comes to mind when you think of a void?',
 'What do you hear when you listen to your voice?',
-  'Where do you keep your laughter when you are not using it?',
-
-  'Why are you angry?',
- 'why are you angry?',
+'Where do you keep your laughter when you are not using it?',
  'why are you angry?',
   'Where do you hide your secrets',
   'Who are trying to impress?',
-  
-  'type...............',
-
-  , '........tap.......',
- 
-  '',
-  '.',
-  'Try tapping the screen.',
-  'Try typing on the keyboard.',
-  '.',
-  'Try tapping on the top or bottom.',
-  'Try tapping on the Left or Right.',
-  'Try tapping on the Center.',
+  'are you paying attention?',
+  'hello?',
+  'how do you change when someone else is watching',
+  'do you use your credentials to hide?',
   'If you type the "ESC" key, to save Canvas',
   'Why did you tap the screen?',
   'Dont think about it',
 ];
+
 
 let socket = io();
 socket.on("connect",()=>{
@@ -166,11 +159,12 @@ socket.on("data",(data)=>{
 function colorList(H, S) {
   bkCol = color(0, 0, 8);
  // shapeCol = color(H, S, 100);
- shapeCol = color('gold');
+ shapeCol = color('lightyellow');
   goldCol = color(20, 170, 5);
   // txtCol = color(H, S, 100);
-  txtCol = color('beige');
-
+  introTxtCol = color('water');
+circleCol = color(10, 10);
+circleCol.setAlpha(100);
 }
 
 function sizeList() {
@@ -196,7 +190,7 @@ function draw(){
   if (isLoading == true) {
     background(bkCol);
     noStroke();
-    fill(txtCol);
+    fill(introTxtCol);
     textSize(h4);
     text('Loading', width / 2, height / 2);
 
@@ -209,27 +203,33 @@ function draw(){
 
   else if (isLoading == false) {
     introduction();
+    //CIRCLE SIZE CREATE
+    stroke("beige");
+    strokeWeight(25);
+    noFill (circleCol);
+    circle(windowWidth/2,windowHeight/2, 0.9*min(windowWidth, windowHeight));
     isStarted = true;
   }
-
+ 
 
   if(isPlayScreen == true && frameCount % 600 == 0){
     input < messageList.length ? input++ : input = 0;
     // messages.push(new MessageCustom("nicoleta", width/2, height/2));
-    messages.push(new Message1(input));
+    // messages.push(new Message1(input));
+    messages.push(new MessageCustom(messageList[input], width/2, height/2, 600));
   }
 
   if (isPlayScreen == true){
     // console.log(frameCount);
     let textShowTime =1000;
     if (frameCount == textShowTime){
-      let myText = "simon?"; 
+      let myText = "are you with me?"; 
 
       let textX = 200; 
       //MAKE SURE TEXT AND TEXT Y ARE > 0
       // let textX = width/4-200;
       // let textY = height/4;
-      let textY = 200;
+      let textY = 300;
       let textLifetime = 600;
       messages.push(new MessageCustom(myText, textX, textY, textLifetime));
   
@@ -265,7 +265,7 @@ index++;
   }
 
 
-//random word repeat horizontal line on top (only random x)
+//RANDOM WORD REPEAT horizontal line on top (only random x)
   // if(isPlayScreen == true && frameCount % 10 == 0){
   //   let myText = "nIcoleta"; 
   //   let textX = random(0, width); 
@@ -324,11 +324,12 @@ index++;
 
 let introTextList = [
   //  'How do you know what you think?',
-  "where does your mind go when it wanders///?",
-  "try to follow it here.",
-  'can you catch it?',
-  "tap around the screen or type in your response to the prompts",
-  "where is your mind now?",]
+  'ATTENTION',
+  '[noun uh-ten-shuhn',
+  'the act or faculty of attending, especially by directing the mind to an object. a state of consciousness characterized by such concentration.',
+   'a capacity to maintain selective or sustained concentration. observant care; consideration: civility or courtesy:notice or awareness.',
+  'WORDS RELATED TO ATTENTION: thinking, mind, scrutiny, thought, consideration, debate, recognition, regard, treatment, spotlight, awareness, concern, contemplation, assiduity,  deliberation, diligence, immersion, absorption, study, heedfulness',
+ ]
 
 function introduction(){
   if(isTapped == true && txtAlpha < 100){
@@ -349,24 +350,26 @@ function introduction(){
 
   background(bkCol);
 
-
+//INTRO TEXT SETUP 
   noStroke();
-  textSize(h1);
-  txtCol.setAlpha(txtAlpha);
-  fill(txtCol);
+  textSize(h2);
+  introTxtCol.setAlpha(txtAlpha);
+  fill(introTxtCol);
   text(introTextList[0], width/2, height/2-h1*2);
+  // text(introTextList[2], width/2, height/2-h3*2);
 
   textSize(h3);
-  text(introTextList[1], width/2, height/2 );
+  text(introTextList[1], width/2, height/2-h4*4);
   text(introTextList[2], width/2, height/2 + h1);
   text(introTextList[3], width/2, height/2 + h1*2);
   
   textSize(h4);
-  text(introTextList[4], width/2, height/2 + h1*4);
+  text(introTextList[4], width/8, height/2);
+  text(introTextList[5], windowWidth/windowHeight);
 }
 
 function touchStarted() {
-
+8
   if(isStarted == true){
     isTapped = false;
   }
@@ -389,9 +392,10 @@ function touchStarted() {
     else if(mouseY > height / 10 * 9){
       // mokumokuSound.play();
       // mokumokuSound.amp(0.1);
-      for(let i = 0; i < 10; i++){
-        animations.push(new AnimationBottom(mouseX, i));
-      }
+      // for(let i = 0; i < 10; i++){
+      //   animations.push(new AnimationBottom(mouseX, i));
+      // }
+      animations.push(new AnimationTouch3());
     }
 
     else if(mouseX < width / 10){
@@ -406,7 +410,7 @@ function touchStarted() {
       // basabasa1Sound.play();
       // basabasa1Sound.amp(0.2);
       for(let i = 0; i < 5; i++){
-        animations.push(new AnimationRight(i));
+        // animations.push(new AnimationRight(i));
       }
     }
 
@@ -421,8 +425,19 @@ function touchStarted() {
     //     }
     //   }
     
-  // GO HERE TO SEE ANIMATION DISTINCTIONS !!!( change from 0-10)
-  randomNumber = 1;
+  // GO HERE TO SEE ANIMATION DISTINCTIONS !!!( change from 0-10) no ,4,6,8,9, maybe 10
+  //0 = circle ripples *** slow down, increase stroke weight
+  //1 = bubbles radiating outward
+//2= circles radiating downwards ***
+//3= quiet reverberation from bottom (question: how do I distinguish between this and bottom animation?)
+//5 = bubbles radiating outward more prounounced and bigger than 1
+//6 = infinity fireflies
+//7
+
+
+
+//clicktop = rain, click left outward dots, click bottom = quiet radiance, click right? 
+  randomNumber = 10;
 
 
     // randomNumber = floor(random(11));
@@ -475,12 +490,12 @@ for(let i= 0; i<10; i ++ ){
         animations.push(new AnimationTouch3());
       }
 
-      //ANIMATION4 
-      else if (randomNumber == 4) {
-        // walk2Sound.play();
-        // walk2Sound.amp(0.1);
-        animations.push(new AnimationTouch4(mouseY));
-      }
+      // //ANIMATION4 
+      // else if (randomNumber == 4) {
+      //   // walk2Sound.play();
+      //   // walk2Sound.amp(0.1);
+      //   animations.push(new AnimationTouch4(mouseY));
+      // }
 
       //ANIMATION 5
       else if (randomNumber == 5) {
@@ -673,17 +688,19 @@ class AnimationTouch2 {
 //ANIMATION 3
 class AnimationTouch3 {
   constructor() {
-    this.alpha = random(50);
+    //higher alpha more opaque
+    this.alpha = random(1);
+    this.maxAlpha = 30;
     this.switch = 0;
     this.p = createVector(width / 2, height);
     this.d = 0;
     this.lifetime = 300;
   }
   draw() {
-    if(this.switch == 0 && this.alpha < 50){
+    if(this.switch == 0 && this.alpha < this.maxAlpha){
       this.alpha++;
-    }else if(this.switch == 0 && this.alpha >= 50){
-      this.alpha = 50;
+    }else if(this.switch == 0 && this.alpha >= this.maxAlpha){
+      this.alpha = this.maxAlpha;
       this.switch = 1;
     }
 
@@ -692,7 +709,10 @@ class AnimationTouch3 {
     }else if(this.switch == 1 && this.alpha <= 0){
       this.alpha = 0;
     }
-    this.d += 10;
+    //pace of diameter growing !!
+    if (frameCount %2){
+      this.d+=10;
+    }
     this.lifetime--;
 
     noStroke();
@@ -778,17 +798,17 @@ class AnimationTouch5 {
 }
 
 
-//ANIMATION 6
+//ANIMATION 6: infinity fireflies (made bigger and brighter w shorter lifetime)
 class AnimationTouch6 {
   constructor(x, y, i) {
-    this.alpha = random(50);
+    this.alpha = random(100);
     this.switch = 0;
     this.d = random(5);
     this.p = createVector(x, y);
-    this.r = newSize / 5;
+    this.r = newSize / 1;
     this.a = i;
     this.dif = map(i, 0, 20, 3, 1);
-    this.lifetime = 200;
+    this.lifetime = 20;
   }
   draw() {
     this.a += 0.05 * this.dif;
@@ -817,12 +837,12 @@ class AnimationTouch6 {
 }
 
 
-//ANIMATION 7
+//ANIMATION 7: hovering fireflies !!!! only want this to show up very seldom!
 class AnimationTouch7 {
   constructor(x, y, i) {
     this.alpha = random(50);
     this.switch = 0;
-    this.d = random(5);
+    this.d = random(2);
     this.p = createVector(random(x-10, x+10), random(y-10, y+10));
     this.a = 0;
     this.step_1 = 0.157 / 2;
@@ -865,7 +885,7 @@ class AnimationTouch7 {
   }
 }
 
-//ANIMATION 8
+//ANIMATION 8: center circles up and down 
 
 class AnimationTouch8 {
   constructor(x) {
@@ -875,7 +895,7 @@ class AnimationTouch8 {
     this.p1 = createVector(x, -this.d);
     this.p2 = createVector(x, height +  this.d);
     this.v = createVector(0, random(10, 20));
-    this.lifetime = 200;
+    this.lifetime = 25;
   }
   draw() {
     if(this.switch == 0 && this.alpha < 80){
@@ -903,7 +923,7 @@ class AnimationTouch8 {
   }
 }
 
-//ANIMATION 9
+//ANIMATION 9: circles throughout (changed to black)
 
 class AnimationTouch9 {
   constructor(x) {
@@ -931,20 +951,20 @@ class AnimationTouch9 {
     this.lifetime--;
      this.d--;
     if(this.c == 0){
-      noStroke();
+      noStroke(); 
       shapeCol.setAlpha(this.alpha);
-      fill(shapeCol);
+      fill("black");
     }else if(this.c == 1){
       noFill();
       shapeCol.setAlpha(this.alpha);
-      stroke(shapeCol);
-      strokeWeight(3);
+      stroke("black");
+      strokeWeight(5);
     }
     circle(this.p.x, this.p.y, this.d);
   }
 }
 
-//ANIMATION 10
+//ANIMATION 10: black eclipse cirlces (want to make more transparent)
 class AnimationTouch10 {
   constructor() {
     this.alpha = random(50);
@@ -953,7 +973,7 @@ class AnimationTouch10 {
     this.p2 = createVector(width, height);
     this.p = random(2)>1 ? this.p1 : this.p2;
     this.d = 0;
-    this.lifetime = 300;
+    this.lifetime = 200;
   }
   draw() {
     if(this.switch == 0 && this.alpha < 50){
@@ -973,7 +993,7 @@ class AnimationTouch10 {
 
     noStroke();
     shapeCol.setAlpha(this.alpha);
-    fill(shapeCol);
+    fill('black');
     circle(this.p.x, this.p.y, this.d);
   }
 }
@@ -1231,7 +1251,7 @@ class AnimationType {
     this.lifetime--;
 
     noStroke();
-    goldCol.setAlpha(this.alpha);
+   goldCol.setAlpha(this.alpha);
     fill(goldCol);
     textSize(this.d);
     text(this.myMessage,this.p.x, this.p.y);
