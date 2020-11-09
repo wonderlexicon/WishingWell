@@ -1,13 +1,9 @@
 
 
 //QUESTIONS!!! HOW DO I CHANGE THE DEFAULT FLOW OF MESSAGES? WANT TO STOP THE REPETITION OF MESSAGE 1, WANT TO ALTER MESSAGE PLACEMENT - MAKE MESSAGES APPEAR AT DIFFERENT PLACES ON THE CANVAS TO DRAW USER ATTENTION IN DIFFERENT DIRECTIONS. ALSO, HOW DO I PLAY WITH THE PACING AND CHANGE THE RATE OF WHEN MESSAGES SHOW? https://p5js.org/examples/simulate-multiple-particle-systems.html want this at end
-//WHAT IS ANIMATION CENTER?
 
-// let bgmSound;
-// let drop1Sound, drop2Sound, drop3Sound;
-// let suzu1Sound,suzu2Sound, suzu3Sound;
-// let mokumokuSound, basabasa1Sound, basabasa2Sound;
-// let walk1Sound, walk2Sound;
+//want to set a color range for shapeCol and text col
+
 
 
 let isLoading = false;
@@ -43,32 +39,40 @@ let bkCol, shapeCol, goldCol, introTxtCol, circleCol;
 //CREATE LIST OF POSITIONS ON JAMBOARD
 
 let messageList = [
-  'this is a mirror of your mind',
-  "where does your mind go when it wanders?",
-  "try to follow it here.",
-  'can you catch it?',
-  "tap around the screen or type in your response to the prompts",
+  // 'this is a mirror of your mind',
+  // 'explore the space',
+  // 'experience the questions',
+  'reflect.',
+  "are forgotten memories \n more \n or less \n real \n than dreams you remember? ",
+  'what is the shape of an unformed thought?',
+  'does uncertainty have a weight?',
+  "where does your mind go \n when it wanders?",
+  'what makes will free?',
+  'do you feel your thoughts \n or think your feelings?',
+  'who chose the thoughts are you thinking right now?',
+  // "try to follow it here.",
+'why are you lonely?',
+  // "tap around the screen \n or \n type in your response to the prompts",
   "where is your mind now?",
 'how often are you in ecstasy?',
 'can you find temper in the place where you lose it?',
-"are forgotten memories less real than dreams you remember? ",
 'what controls your attention?',
-'are you aware of your attention\'s',
+'why are you sad?',
 "'how do you know what you know?'",
 'do you believe what you see more than what you hear? less or more the same than what you think?',
-'do you think its easier to feel anger than acknowledge fear?',
+'do you think its easier to feel anger or acknowledge fear?',
+'how do you know the difference between right and wrong?',
+'what does your attention think?',
 'where is its center?',
-'can you see it?',
-'what do you see when you look in the mirror',
-'how well do you handle disappointment?',
+// 'what do you see when you look in the mirror',
+// 'how well do you handle disappointment?',
 'when was the last time you danced in the rain?',
 'when you are all alone in silence where do your thoughts go?',
 'How do you know what you think?',
 'Where does a new thought come from?',
 'When does an old thought end?',
-'Can you catch it?',
-'who chose the thoughts are you thinking right now?',
-'what comes to mind when you think of a void?',
+// 'Can you catch it?',
+'what fills your mind when you imagine emptiness?',
 'What do you hear when you listen to your voice?',
 'Where do you keep your laughter when you are not using it?',
  'why are you angry?',
@@ -96,19 +100,6 @@ function loadAsset() {
   textFont('Poiret One');
   
 
-  // bgmSound = loadSound('data/quiet-room-1.mp3', assetLoaded);
-  // drop1Sound = loadSound('data/drop1.mp3', assetLoaded);
-  // drop2Sound = loadSound('data/drop2.mp3', assetLoaded);
-  // drop3Sound = loadSound('data/drop3.mp3', assetLoaded);
-  // suzu1Sound = loadSound('data/suzu1.mp3', assetLoaded);
-  // suzu2Sound = loadSound('data/suzu2.mp3', assetLoaded);
-  // suzu3Sound = loadSound('data/suzu3.mp3', assetLoaded);
-  // mokumokuSound = loadSound('data/mokumoku.mp3', assetLoaded);
-  // basabasa1Sound = loadSound('data/basabasa1.mp3', assetLoaded);
-  // basabasa2Sound = loadSound('data/basabasa2.mp3', assetLoaded);
-  // walk1Sound = loadSound('data/walk1.mp3', assetLoaded);
-  // walk2Sound = loadSound('data/walk2.mp3', assetLoaded);
-  
 
   function assetLoaded() {
     // assetCounter++;
@@ -125,12 +116,12 @@ function setup(){
     let x = random(width);
     let y = random(height);
     console.log(x,y);
-    boids[i] = new Boid(x,y);
+    // boids[i] = new Boid(x,y);
      }
 
   pixelDensity(2);
 
-  colorMode(HSB, 360, 100, 100, 100);
+  colorMode(RGB, 100);
 
 
   loadAsset();
@@ -156,15 +147,15 @@ socket.on("data",(data)=>{
 
 
 // txt = intro font color, shapeCol = automated shapes and font, goldCol=user text
-function colorList(H, S) {
-  bkCol = color(0, 0, 8);
+function colorList(R, G, B) {
+  bkCol = color(0, 0, 17);
  // shapeCol = color(H, S, 100);
- shapeCol = color('lightyellow');
-  goldCol = color(20, 170, 5);
-  // txtCol = color(H, S, 100);
+ shapeCol = color("ivory");
+  goldCol = color('white');
+  // txtCol = color(H, S, 29);
   introTxtCol = color('water');
-circleCol = color(10, 10);
-circleCol.setAlpha(100);
+circleCol = color('fog');
+circleCol.setAlpha(200);
 }
 
 function sizeList() {
@@ -204,15 +195,15 @@ function draw(){
   else if (isLoading == false) {
     introduction();
     //CIRCLE SIZE CREATE
-    stroke("ivory");
-    strokeWeight(12);
+    stroke('platinum');
+    strokeWeight(8);
     noFill (circleCol);
     circle(windowWidth/2,windowHeight/2, 0.9*min(windowWidth, windowHeight));
     isStarted = true;
   }
  
 
-  if(isPlayScreen == true && frameCount % 600 == 0){
+  if(isPlayScreen == true && frameCount % 300 == 0){
     input < messageList.length ? input++ : input = 0;
     // messages.push(new MessageCustom("nicoleta", width/2, height/2));
     // messages.push(new Message1(input));
@@ -221,9 +212,9 @@ function draw(){
   let textShowTime ;
   if (isPlayScreen == true){
     // console.log(frameCount);
-    textShowTime =300;
+    textShowTime =150;
     if (frameCount == textShowTime){
-      let myText = "simon?"; 
+      let myText = "can you see it?"; 
 
       let textX = 200; 
 
@@ -238,9 +229,9 @@ function draw(){
 
 
 
-    textShowTime =400;
+    textShowTime =800;
     if (frameCount == textShowTime){
-      let myText = "yooo?"; 
+      let myText = 'engage.'; 
 
       let textX = 400; 
 
@@ -256,7 +247,7 @@ function draw(){
 
     textShowTime =2000;
     if (frameCount == textShowTime){
-      let myText = "three?"; 
+      let myText = "Where is your mind now?"; 
 
       let textX = windowWidth - 200; 
 
@@ -264,7 +255,22 @@ function draw(){
       // let textX = width/4-200;
       // let textY = height/4;
       let textY = 300;
-      let textLifetime = 600;
+      let textLifetime = 30;
+      messages.push(new MessageCustom(myText, textX, textY, textLifetime));
+  
+    }
+
+    textShowTime =6000;
+    if (frameCount == textShowTime){
+      let myText = "Where is your mind now?"; 
+
+      let textX = windowWidth - 300; 
+
+      //POSITION TEXT - MAKE SURE TEXT AND TEXT Y ARE > 0
+      // let textX = width/4-200;
+      // let textY = height/4;
+      let textY = 300;
+      let textLifetime = 30;
       messages.push(new MessageCustom(myText, textX, textY, textLifetime));
   
     }
@@ -357,12 +363,14 @@ function draw(){
   //INTRO TEXT GROUP
 
 let introTextList = [
+  'THIS IS A MIRROR OF YOUR MIND',
   //  'How do you know what you think?',
-  'ATTENTION',
-  '[noun uh-ten-shuhn',
-  'the act or faculty of attending, especially by directing the mind to an object. \n a state of consciousness characterized by such concentration.',
-   'a capacity to maintain selective or sustained concentration. \n observant care; consideration: civility or courtesy:notice or awareness.', 
-  'WORDS RELATED TO ATTENTION: \n thinking, mind, scrutiny, thought, consideration, debate, recognition, \n regard, treatment, spotlight, awareness, concern, contemplation, assiduity, \n deliberation, diligence, immersion, absorption, study, heedfulness',
+  // 'ATTENTION',
+  // '[noun uh-ten-shuhn',
+  // 'the act or faculty of attending, especially by directing the mind to an object. \n a state of consciousness characterized by such concentration.',
+  //  'a capacity to maintain selective or sustained concentration. \n observant care; consideration: civility or courtesy:notice or awareness.', 
+  // 'WORDS RELATED TO ATTENTION: \n thinking, mind, scrutiny, thought, consideration, debate, recognition, \n
+  //  regard, treatment, spotlight, awareness, concern, contemplation, assiduity, \n deliberation, diligence, immersion, absorption, study, heedfulness',
  ]
 
 function introduction(){
@@ -375,8 +383,6 @@ function introduction(){
   if(isTapped == false && txtAlpha > 0){
     txtAlpha-= 5;
 
-    // bgmSound.loop();
-    // bgmSound.amp(0.2);
 
   }else if(isTapped == false && txtAlpha < 0){
     txtAlpha = 0;
@@ -389,7 +395,7 @@ function introduction(){
   textSize(h2);
   introTxtCol.setAlpha(txtAlpha);
   fill(introTxtCol);
-  text(introTextList[0], width/2, height/2 - h1*3);
+  text(introTextList[0], width/2, height/2 - h1*2);
   // text(introTextList[2], width/2, height/2-h3*2);
 
   textSize(h3);
@@ -401,7 +407,7 @@ function introduction(){
   text(introTextList[4], width/2, height/2 + h1*4);
   // text(introTextList[5], width/2, height/2);
 }
-
+2
 function touchStarted() {
 8
   if(isStarted == true){
@@ -416,33 +422,25 @@ function touchStarted() {
     colorList(0, 0);
 
     if(mouseY < height / 10){
-      // suzu2Sound.play();
-      // suzu2Sound.amp(0.1);
+   
       for(let i = 0; i < 30; i++){
         animations.push(new AnimationTop(i));
       }
     }
  
     else if(mouseY > height / 10 * 9){
-      // mokumokuSound.play();
-      // mokumokuSound.amp(0.1);
-      // for(let i = 0; i < 10; i++){
-      //   animations.push(new AnimationBottom(mouseX, i));
-      // }
+     
       animations.push(new AnimationTouch3());
     }
 
     else if(mouseX < width / 10){e
-      // basabasa2Sound.play();
-      // basabasa2Sound.amp(0.2);
       for(let i = 0; i < 20; i++){
         animations.push(new AnimationLeft(i));
       }
     }
 
     else if(mouseX > width / 10 * 9){
-      // basabasa1Sound.play();
-      // basabasa1Sound.amp(0.2);
+     
       for(let i = 0; i < 5; i++){
         // animations.push(new AnimationRight(i));
       }
@@ -450,8 +448,7 @@ function touchStarted() {
 
 //ANIMATION CENTER?
     // else if (mouseX > width / 2 - 10 && mouseX < width / 2 + 10 && mouseY > height / 2 - 10 &&  mouseY < height / 2 + 10){
-    //   // drop3Sound.play();
-    //   // drop3Sound.amp(0.1);
+    
     //   for(let i = 0; i < 10; i++){
     //     random(2)>1?
     //     animations.push(new AnimationCenter1(i)):
@@ -481,8 +478,7 @@ function touchStarted() {
     // }
 
       if (randomNumber == 0) {
-        // drop1Sound.play();
-        // drop1Sound.amp(0.1);
+     
         for(let i = 0; i < 3; i++){
           animations.push(new AnimationTouch0(mouseX, mouseY, i));
         }
@@ -492,8 +488,7 @@ function touchStarted() {
       //ANIMATION1
 
       else if (randomNumber == 1) {
-        // drop3Sound.play();
-        // drop3Sound.amp(0.1);
+        
         //   // Add an initial set of boids into the system
 for(let i= 0; i<10; i ++ ){
   animations.push(new AnimationTouch1(mouseX, mouseY));
@@ -510,8 +505,7 @@ for(let i= 0; i<10; i ++ ){
 
       //ANIMATION2
       else if (randomNumber == 2) {
-        // drop2Sound.play();
-        // drop2Sound.amp(0.1);
+    
         for(let i = 0; i < 3; i++){
           animations.push(new AnimationTouch2(mouseX, mouseY, i));
         }
@@ -519,22 +513,19 @@ for(let i= 0; i<10; i ++ ){
 
       //ANIMATION3
       else if (randomNumber == 3) {
-        // basabasa1Sound.play();
-        // basabasa1Sound.amp(0.2);
+     
         animations.push(new AnimationTouch3());
       }
 
       // //ANIMATION4 
       // else if (randomNumber == 4) {
-      //   // walk2Sound.play();
-      //   // walk2Sound.amp(0.1);
+      
       //   animations.push(new AnimationTouch4(mouseY));
       // }
 
       //ANIMATION 5
       else if (randomNumber == 5) {
-        // suzu1Sound.play();
-        // suzu1Sound.amp(0.1);
+      ;
         let n = random(50, 200);
         for(let i = 0; i < 5; i++){
         animations.push(new AnimationTouch5(mouseX, mouseY, i, n));
@@ -542,8 +533,7 @@ for(let i= 0; i<10; i ++ ){
       }
       //ANIMATION 6
       else if (randomNumber == 6) {
-        // suzu2Sound.play();
-        // suzu2Sound.amp(0.1);
+    
         for(let i = 0; i < 20; i++){
           animations.push(new AnimationTouch6(mouseX, mouseY, i));
         }
@@ -551,8 +541,7 @@ for(let i= 0; i<10; i ++ ){
 
       //ANIMATION7
       else if (randomNumber == 7) {
-        // suzu3Sound.play();
-        // suzu3Sound.amp(0.1);
+
         for(let i = 0; i < 10; i++){
           animations.push(new AnimationTouch7(mouseX, mouseY, i));
         }
@@ -560,15 +549,13 @@ for(let i= 0; i<10; i ++ ){
 
       //ANIMATION8
       else if (randomNumber == 8) {
-        // walk2Sound.play();
-        // walk2Sound.amp(0.1);
+    
         animations.push(new AnimationTouch8(mouseX));
       }
 
       //ANIMATION9
       else if (randomNumber == 9) {
-        // drop1Sound.play();
-        // drop1Sound.amp(0.1);
+    
         for(let i = 0; i <10; i++){
           animations.push(new AnimationTouch9());
         }
@@ -576,8 +563,7 @@ for(let i= 0; i<10; i ++ ){
 
       //ANIMATION10
       else if (randomNumber == 10) {
-        // basabasa1Sound.play();
-        // basabasa1Sound.amp(0.2);
+     
         animations.push(new AnimationTouch10());
   
       }
@@ -595,8 +581,6 @@ function keyTyped() {
  socket.emit("data", {key:key});
 
 
-    // walk1Sound.play();
-    // walk1Sound.amp(0.1);
  
     if (userTypedMessage === null) {
       userTypedMessage =new AnimationType(key);
@@ -619,13 +603,13 @@ class AnimationTouch0 {
   constructor(x, y, i) {
     this.alpha = random(50);
     this.switch = 0;
-    this.lifetime = 200;
+    this.lifetime = 300;
     this.p = createVector(x, y);
     this.d = random(100);
     this.weight = i + 1;
   }
   draw() {
-    if(this.switch == 0 && this.alpha < 100){
+    if(this.switch == 0 && this.alpha < 50){
       this.alpha++;
     }else if(this.switch == 0 && this.alpha >= 100){
       this.alpha = 100;
@@ -642,8 +626,9 @@ class AnimationTouch0 {
 
     noFill();
     shapeCol.setAlpha(this.alpha);
-    stroke(shapeCol);
+    stroke("sagegreen");
     strokeWeight(this.weight);
+    strokeWeight(3);
     circle(this.p.x, this.p.y, this.d);
   }
 }
@@ -987,11 +972,11 @@ class AnimationTouch9 {
     if(this.c == 0){
       noStroke(); 
       shapeCol.setAlpha(this.alpha);
-      fill("black");
+      fill("midnightblue");
     }else if(this.c == 1){
       noFill();
       shapeCol.setAlpha(this.alpha);
-      stroke("black");
+      stroke("midnightblue");
       strokeWeight(5);
     }
     circle(this.p.x, this.p.y, this.d);
@@ -1001,7 +986,7 @@ class AnimationTouch9 {
 //ANIMATION 10: black eclipse cirlces (want to make more transparent)
 class AnimationTouch10 {
   constructor() {
-    this.alpha = random(50);
+    this.alpha = random(10);
     this.switch = 0;
     this.p1 = createVector(0, height);
     this.p2 = createVector(width, height);
@@ -1010,10 +995,10 @@ class AnimationTouch10 {
     this.lifetime = 200;
   }
   draw() {
-    if(this.switch == 0 && this.alpha < 50){
+    if(this.switch == 0 && this.alpha < 10){
       this.alpha++;
-    }else if(this.switch == 0 && this.alpha >= 50){
-      this.alpha = 50;
+    }else if(this.switch == 0 && this.alpha >= 10){
+      this.alpha = 10;
       this.switch = 1;
     }
 
@@ -1027,7 +1012,7 @@ class AnimationTouch10 {
 
     noStroke();
     shapeCol.setAlpha(this.alpha);
-    fill('black');
+    fill('sand');
     circle(this.p.x, this.p.y, this.d);
   }
 }
@@ -1063,7 +1048,7 @@ class AnimationCenter1 {
 
     noStroke();
     shapeCol.setAlpha(this.alpha);
-    fill("white");
+    fill("taupe");
     circle(cos(this.a) * this.r + this.p.x, sin(this.a) * this.r + this.p.y, this.d);
   }
 }
@@ -1390,184 +1375,184 @@ class MessageCustom {
 //    startRecording();
 //    }
 //    isRecording = !isRecording;
-//}
+// //}
 
-let boids = [];
+// let boids = [];
 
-// function setup() {
-//   createCanvas(720, 400);
+// // function setup() {
+// //   createCanvas(720, 400);
 
-//   // Add an initial set of boids into the system
-//   for (let i = 0; i < 100; i++) {
-//     boids[i] = new Boid(random(width), random(height));
+// //   // Add an initial set of boids into the system
+// //   for (let i = 0; i < 100; i++) {
+// //     boids[i] = new Boid(random(width), random(height));
+// //   }
+// // }
+
+// // function draw() {
+// //   background(51);
+// //   // Run all the boids
+// //   for (let i = 0; i < boids.length; i++) {
+// //     boids[i].run(boids);
+// //   }
+// // }
+
+// // Boid class
+// // Methods for Separation, Cohesion, Alignment added
+// class Boid {
+//   constructor(x, y) {
+//     this.acceleration = createVector(0, 0);
+//     this.velocity = p5.Vector.random2D();
+//     this.position = createVector(x, y);
+//     this.r = 3.0;
+//     this.maxspeed = 3;    // Maximum speed
+//     this.maxforce = 0.05; // Maximum steering force
 //   }
-// }
 
-// function draw() {
-//   background(51);
-//   // Run all the boids
-//   for (let i = 0; i < boids.length; i++) {
-//     boids[i].run(boids);
+//   run(boids) {
+//     this.flock(boids);
+//     this.update();
+//     this.borders();
+//     this.render();
 //   }
+  
+//   // Forces go into acceleration
+//   applyForce(force) {
+//     this.acceleration.add(force);
+//   }
+  
+//   // We accumulate a new acceleration each time based on three rules
+//   flock(boids) {
+//     let sep = this.separate(boids); // Separation
+//     let ali = this.align(boids);    // Alignment
+//     let coh = this.cohesion(boids); // Cohesion
+//     // Arbitrarily weight these forces
+//     sep.mult(2.5);
+//     ali.mult(1.0);
+//     coh.mult(1.0);
+//     // Add the force vectors to acceleration
+//     this.applyForce(sep);
+//     this.applyForce(ali);
+//     this.applyForce(coh);
+//   }
+  
+//   // Method to update location
+//   update() {
+//     // Update velocity
+//     this.velocity.add(this.acceleration);
+//     // Limit speed
+//     this.velocity.limit(this.maxspeed);
+//     this.position.add(this.velocity);
+//     // Reset acceleration to 0 each cycle
+//     this.acceleration.mult(0);
+//   }
+  
+//   // A method that calculates and applies a steering force towards a target
+//   // STEER = DESIRED MINUS VELOCITY
+//   seek(target) {
+//     let desired = p5.Vector.sub(target, this.position); // A vector pointing from the location to the target
+//     // Normalize desired and scale to maximum speed
+//     desired.normalize();
+//     desired.mult(this.maxspeed);
+//     // Steering = Desired minus Velocity
+//     let steer = p5.Vector.sub(desired, this.velocity);
+//     steer.limit(this.maxforce); // Limit to maximum steering force
+//     return steer;
+//   }
+  
+//   // Draw boid as a circle
+//   render() {
+//     fill(127, 127);
+//     stroke(200);
+//     ellipse(this.position.x, this.position.y, 16, 16);
+//   }
+  
+//   // Wraparound
+//   borders() {
+//     if (this.position.x < -this.r) this.position.x = width + this.r;
+//     if (this.position.y < -this.r) this.position.y = height + this.r;
+//     if (this.position.x > width + this.r) this.position.x = -this.r;
+//     if (this.position.y > height + this.r) this.position.y = -this.r;
+//   }
+  
+//   // Separation
+//   // Method checks for nearby boids and steers away
+//   separate(boids) {
+//     let desiredseparation = 25.0;
+//     let steer = createVector(0, 0);
+//     let count = 0;
+//     // For every boid in the system, check if it's too close
+//     for (let i = 0; i < boids.length; i++) {
+//       let d = p5.Vector.dist(this.position, boids[i].position);
+//       // If the distance is greater than 0 and less than an arbitrary amount (0 when you are yourself)
+//       if ((d > 0) && (d < desiredseparation)) {
+//         // Calculate vector pointing away from neighbor
+//         let diff = p5.Vector.sub(this.position, boids[i].position);
+//         diff.normalize();
+//         diff.div(d); // Weight by distance
+//         steer.add(diff);
+//         count++; // Keep track of how many
+//       }
+//     }
+//     // Average -- divide by how many
+//     if (count > 0) {
+//       steer.div(count);
+//     }
+  
+//     // As long as the vector is greater than 0
+//     if (steer.mag() > 0) {
+//       // Implement Reynolds: Steering = Desired - Velocity
+//       steer.normalize();
+//       steer.mult(this.maxspeed);
+//       steer.sub(this.velocity);
+//       steer.limit(this.maxforce);
+//     }
+//     return steer;
+//   }
+  
+//   // Alignment
+//   // For every nearby boid in the system, calculate the average velocity
+//   align(boids) {
+//     let neighbordist = 50;
+//     let sum = createVector(0, 0);
+//     let count = 0;
+//     for (let i = 0; i < boids.length; i++) {
+//       let d = p5.Vector.dist(this.position, boids[i].position);
+//       if ((d > 0) && (d < neighbordist)) {
+//         sum.add(boids[i].velocity);
+//         count++;
+//       }
+//     }
+//     if (count > 0) {
+//       sum.div(count);
+//       sum.normalize();
+//       sum.mult(this.maxspeed);
+//       let steer = p5.Vector.sub(sum, this.velocity);
+//       steer.limit(this.maxforce);
+//       return steer;
+//     } else {
+//       return createVector(0, 0);
+//     }
+//   }
+  
+//   // Cohesion
+//   // For the average location (i.e. center) of all nearby boids, calculate steering vector towards that location
+//   cohesion(boids) {
+//     let neighbordist = 50;
+//     let sum = createVector(0, 0); // Start with empty vector to accumulate all locations
+//     let count = 0;
+//     for (let i = 0; i < boids.length; i++) {
+//       let d = p5.Vector.dist(this.position, boids[i].position);
+//       if ((d > 0) && (d < neighbordist)) {
+//         sum.add(boids[i].position); // Add location
+//         count++;
+//       }
+//     }
+//     if (count > 0) {
+//       sum.div(count);
+//       return this.seek(sum); // Steer towards the location
+//     } else {
+//       return createVector(0, 0);
+//     }
+//   }  
 // }
-
-// Boid class
-// Methods for Separation, Cohesion, Alignment added
-class Boid {
-  constructor(x, y) {
-    this.acceleration = createVector(0, 0);
-    this.velocity = p5.Vector.random2D();
-    this.position = createVector(x, y);
-    this.r = 3.0;
-    this.maxspeed = 3;    // Maximum speed
-    this.maxforce = 0.05; // Maximum steering force
-  }
-
-  run(boids) {
-    this.flock(boids);
-    this.update();
-    this.borders();
-    this.render();
-  }
-  
-  // Forces go into acceleration
-  applyForce(force) {
-    this.acceleration.add(force);
-  }
-  
-  // We accumulate a new acceleration each time based on three rules
-  flock(boids) {
-    let sep = this.separate(boids); // Separation
-    let ali = this.align(boids);    // Alignment
-    let coh = this.cohesion(boids); // Cohesion
-    // Arbitrarily weight these forces
-    sep.mult(2.5);
-    ali.mult(1.0);
-    coh.mult(1.0);
-    // Add the force vectors to acceleration
-    this.applyForce(sep);
-    this.applyForce(ali);
-    this.applyForce(coh);
-  }
-  
-  // Method to update location
-  update() {
-    // Update velocity
-    this.velocity.add(this.acceleration);
-    // Limit speed
-    this.velocity.limit(this.maxspeed);
-    this.position.add(this.velocity);
-    // Reset acceleration to 0 each cycle
-    this.acceleration.mult(0);
-  }
-  
-  // A method that calculates and applies a steering force towards a target
-  // STEER = DESIRED MINUS VELOCITY
-  seek(target) {
-    let desired = p5.Vector.sub(target, this.position); // A vector pointing from the location to the target
-    // Normalize desired and scale to maximum speed
-    desired.normalize();
-    desired.mult(this.maxspeed);
-    // Steering = Desired minus Velocity
-    let steer = p5.Vector.sub(desired, this.velocity);
-    steer.limit(this.maxforce); // Limit to maximum steering force
-    return steer;
-  }
-  
-  // Draw boid as a circle
-  render() {
-    fill(127, 127);
-    stroke(200);
-    ellipse(this.position.x, this.position.y, 16, 16);
-  }
-  
-  // Wraparound
-  borders() {
-    if (this.position.x < -this.r) this.position.x = width + this.r;
-    if (this.position.y < -this.r) this.position.y = height + this.r;
-    if (this.position.x > width + this.r) this.position.x = -this.r;
-    if (this.position.y > height + this.r) this.position.y = -this.r;
-  }
-  
-  // Separation
-  // Method checks for nearby boids and steers away
-  separate(boids) {
-    let desiredseparation = 25.0;
-    let steer = createVector(0, 0);
-    let count = 0;
-    // For every boid in the system, check if it's too close
-    for (let i = 0; i < boids.length; i++) {
-      let d = p5.Vector.dist(this.position, boids[i].position);
-      // If the distance is greater than 0 and less than an arbitrary amount (0 when you are yourself)
-      if ((d > 0) && (d < desiredseparation)) {
-        // Calculate vector pointing away from neighbor
-        let diff = p5.Vector.sub(this.position, boids[i].position);
-        diff.normalize();
-        diff.div(d); // Weight by distance
-        steer.add(diff);
-        count++; // Keep track of how many
-      }
-    }
-    // Average -- divide by how many
-    if (count > 0) {
-      steer.div(count);
-    }
-  
-    // As long as the vector is greater than 0
-    if (steer.mag() > 0) {
-      // Implement Reynolds: Steering = Desired - Velocity
-      steer.normalize();
-      steer.mult(this.maxspeed);
-      steer.sub(this.velocity);
-      steer.limit(this.maxforce);
-    }
-    return steer;
-  }
-  
-  // Alignment
-  // For every nearby boid in the system, calculate the average velocity
-  align(boids) {
-    let neighbordist = 50;
-    let sum = createVector(0, 0);
-    let count = 0;
-    for (let i = 0; i < boids.length; i++) {
-      let d = p5.Vector.dist(this.position, boids[i].position);
-      if ((d > 0) && (d < neighbordist)) {
-        sum.add(boids[i].velocity);
-        count++;
-      }
-    }
-    if (count > 0) {
-      sum.div(count);
-      sum.normalize();
-      sum.mult(this.maxspeed);
-      let steer = p5.Vector.sub(sum, this.velocity);
-      steer.limit(this.maxforce);
-      return steer;
-    } else {
-      return createVector(0, 0);
-    }
-  }
-  
-  // Cohesion
-  // For the average location (i.e. center) of all nearby boids, calculate steering vector towards that location
-  cohesion(boids) {
-    let neighbordist = 50;
-    let sum = createVector(0, 0); // Start with empty vector to accumulate all locations
-    let count = 0;
-    for (let i = 0; i < boids.length; i++) {
-      let d = p5.Vector.dist(this.position, boids[i].position);
-      if ((d > 0) && (d < neighbordist)) {
-        sum.add(boids[i].position); // Add location
-        count++;
-      }
-    }
-    if (count > 0) {
-      sum.div(count);
-      return this.seek(sum); // Steer towards the location
-    } else {
-      return createVector(0, 0);
-    }
-  }  
-}
 
