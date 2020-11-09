@@ -33,7 +33,8 @@ let messages = [];
 
 let bkCol, shapeCol, goldCol, introTxtCol, circleCol;
 
-
+let dragCircleCol, dragCircleAlpha;
+let dragStrokeWeight;
 
 
 //CREATE LIST OF POSITIONS ON JAMBOARD
@@ -176,6 +177,8 @@ function windowResized() {
 
 let input = -1;
 let index = 0;
+let dragX;
+let dragY;
 function draw(){
   
   if (isLoading == true) {
@@ -194,12 +197,29 @@ function draw(){
 
   else if (isLoading == false) {
     introduction();
+
     //CIRCLE SIZE CREATE
-    stroke('platinum');
+    stroke('beige');
     strokeWeight(8);
     noFill (circleCol);
     circle(windowWidth/2,windowHeight/2, 0.9*min(windowWidth, windowHeight));
     isStarted = true;
+
+    //DRAGGING CIRCLE
+    dragCircleCol = color ("navy");
+    dragCircleAlpha -=5;
+    dragCircleCol.setAlpha(dragCircleAlpha);
+    if (dragStrokeWeight>0){
+      dragStrokeWeight -= 0.1; 
+      strokeWeight(dragStrokeWeight);
+      stroke ("white");
+    } else {
+      noStroke();
+    }
+ 
+     fill (dragCircleCol);
+    ellipse(dragX, dragY, 50, 50);
+
   }
  
 
@@ -407,9 +427,21 @@ function introduction(){
   text(introTextList[4], width/2, height/2 + h1*4);
   // text(introTextList[5], width/2, height/2);
 }
-2
+
+function mouseDragged() {
+
+  console.log ("dragging?");
+ dragX = mouseX;
+ dragY = mouseY;
+ dragCircleAlpha = 100;
+ dragStrokeWeight = 4;
+
+  // prevent default
+  return false;
+}
+
 function touchStarted() {
-8
+
   if(isStarted == true){
     isTapped = false;
   }
@@ -1376,6 +1408,7 @@ class MessageCustom {
     text(this.topText, this.p.x, this.p.y - h1);
 
   }
+
 }
 //function mousePressed() {
 //  if(isRecording == true){
