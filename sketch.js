@@ -204,8 +204,8 @@ function draw(){
   else if (isLoading == false) {
     introduction();
     //CIRCLE SIZE CREATE
-    stroke("beige");
-    strokeWeight(25);
+    stroke("ivory");
+    strokeWeight(12);
     noFill (circleCol);
     circle(windowWidth/2,windowHeight/2, 0.9*min(windowWidth, windowHeight));
     isStarted = true;
@@ -218,15 +218,49 @@ function draw(){
     // messages.push(new Message1(input));
     messages.push(new MessageCustom(messageList[input], width/2, height/2, 600));
   }
-
+  let textShowTime ;
   if (isPlayScreen == true){
     // console.log(frameCount);
-    let textShowTime =1000;
+    textShowTime =300;
     if (frameCount == textShowTime){
-      let myText = "are you with me?"; 
+      let myText = "simon?"; 
 
       let textX = 200; 
-      //MAKE SURE TEXT AND TEXT Y ARE > 0
+
+      //POSITION TEXT - MAKE SURE TEXT AND TEXT Y ARE > 0
+      // let textX = width/4-200;
+      // let textY = height/4;
+      let textY = 300;
+      let textLifetime = 600;
+      messages.push(new MessageCustom(myText, textX, textY, textLifetime));
+  
+    }
+
+
+
+    textShowTime =400;
+    if (frameCount == textShowTime){
+      let myText = "yooo?"; 
+
+      let textX = 400; 
+
+      //POSITION TEXT - MAKE SURE TEXT AND TEXT Y ARE > 0
+      // let textX = width/4-200;
+      // let textY = height/4;
+      let textY = 300;
+      let textLifetime = 60;
+      messages.push(new MessageCustom(myText, textX, textY, textLifetime));
+  
+    }
+
+
+    textShowTime =2000;
+    if (frameCount == textShowTime){
+      let myText = "three?"; 
+
+      let textX = windowWidth - 200; 
+
+      //POSITION TEXT - MAKE SURE TEXT AND TEXT Y ARE > 0
       // let textX = width/4-200;
       // let textY = height/4;
       let textY = 300;
@@ -250,19 +284,19 @@ function draw(){
   }
 
 
-  
+  //Random loop of text through message list
 
-  if(isPlayScreen == true && frameCount % 300 == 0){
-    let myText = messageList[index]; 
-    let textX = random(0, width); 
-    //MAKE SURE TEXT AND TEXT Y ARE > 0
-    // let textX = width/4-200;
-    // let textY = height/4;
-    let textY = random(0, height);
-    let textLifetime = 60;
-    messages.push(new MessageCustom(myText, textX, textY, textLifetime));
-index++;
-  }
+//   if(isPlayScreen == true && frameCount % 300 == 0){
+//     let myText = messageList[index]; 
+//     let textX = random(0, width); 
+//     //MAKE SURE TEXT AND TEXT Y ARE > 0
+//     // let textX = width/4-200;
+//     // let textY = height/4;
+//     let textY = random(0, height);
+//     let textLifetime = 60;
+//     messages.push(new MessageCustom(myText, textX, textY, textLifetime));
+// index++;
+//   }
 
 
 //RANDOM WORD REPEAT horizontal line on top (only random x)
@@ -275,7 +309,7 @@ index++;
   //   messages.push(new MessageCustom(myText, textX, textY));
   // }
 
- //random word repeat x,y
+ //random word repeat x,y around the screen 
   // if(isPlayScreen == true && frameCount % 10 == 0){
   //   let myText = "nIcoleta"; 
   //   let textX = random(0, width); 
@@ -326,9 +360,9 @@ let introTextList = [
   //  'How do you know what you think?',
   'ATTENTION',
   '[noun uh-ten-shuhn',
-  'the act or faculty of attending, especially by directing the mind to an object. a state of consciousness characterized by such concentration.',
-   'a capacity to maintain selective or sustained concentration. observant care; consideration: civility or courtesy:notice or awareness.',
-  'WORDS RELATED TO ATTENTION: thinking, mind, scrutiny, thought, consideration, debate, recognition, regard, treatment, spotlight, awareness, concern, contemplation, assiduity,  deliberation, diligence, immersion, absorption, study, heedfulness',
+  'the act or faculty of attending, especially by directing the mind to an object. \n a state of consciousness characterized by such concentration.',
+   'a capacity to maintain selective or sustained concentration. \n observant care; consideration: civility or courtesy:notice or awareness.', 
+  'WORDS RELATED TO ATTENTION: \n thinking, mind, scrutiny, thought, consideration, debate, recognition, \n regard, treatment, spotlight, awareness, concern, contemplation, assiduity, \n deliberation, diligence, immersion, absorption, study, heedfulness',
  ]
 
 function introduction(){
@@ -355,17 +389,17 @@ function introduction(){
   textSize(h2);
   introTxtCol.setAlpha(txtAlpha);
   fill(introTxtCol);
-  text(introTextList[0], width/2, height/2-h1*2);
+  text(introTextList[0], width/2, height/2 - h1*3);
   // text(introTextList[2], width/2, height/2-h3*2);
 
   textSize(h3);
-  text(introTextList[1], width/2, height/2-h4*4);
+  text(introTextList[1], width/2, height/2-h2*3);
   text(introTextList[2], width/2, height/2 + h1);
   text(introTextList[3], width/2, height/2 + h1*2);
   
   textSize(h4);
-  text(introTextList[4], width/8, height/2);
-  text(introTextList[5], windowWidth/windowHeight);
+  text(introTextList[4], width/2, height/2 + h1*4);
+  // text(introTextList[5], width/2, height/2);
 }
 
 function touchStarted() {
@@ -398,7 +432,7 @@ function touchStarted() {
       animations.push(new AnimationTouch3());
     }
 
-    else if(mouseX < width / 10){
+    else if(mouseX < width / 10){e
       // basabasa2Sound.play();
       // basabasa2Sound.amp(0.2);
       for(let i = 0; i < 20; i++){
@@ -437,10 +471,10 @@ function touchStarted() {
 
 
 //clicktop = rain, click left outward dots, click bottom = quiet radiance, click right? 
-  randomNumber = 10;
+  // randomNumber = 0;
 
 
-    // randomNumber = floor(random(11));
+    randomNumber = floor(random(11));
     //ANIMATION0
     // for(let i = 0; i < 3; i++){
     //   animations.push(new AnimationTouch0(mouseX, mouseY, i));
@@ -1029,7 +1063,7 @@ class AnimationCenter1 {
 
     noStroke();
     shapeCol.setAlpha(this.alpha);
-    fill(shapeCol);
+    fill("white");
     circle(cos(this.a) * this.r + this.p.x, sin(this.a) * this.r + this.p.y, this.d);
   }
 }
