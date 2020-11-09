@@ -26,7 +26,7 @@ let h1, h2, h3, h4;
 
 let angle = 0;
 
-
+let lastAnimationFrame;
 let animations = [];
 let messages = [];
 
@@ -433,7 +433,7 @@ function touchStarted() {
       animations.push(new AnimationTouch3());
     }
 
-    else if(mouseX < width / 10){e
+    else if(mouseX < width / 10){
       for(let i = 0; i < 20; i++){
         animations.push(new AnimationLeft(i));
       }
@@ -469,6 +469,13 @@ function touchStarted() {
 
 //clicktop = rain, click left outward dots, click bottom = quiet radiance, click right? 
   // randomNumber = 0;
+
+
+    let coolDownTime = 50;
+    if (lastAnimationFrame > frameCount-coolDownTime){
+      return;
+    }
+lastAnimationFrame = frameCount;
 
 
     randomNumber = floor(random(11));
@@ -995,10 +1002,11 @@ class AnimationTouch10 {
     this.lifetime = 200;
   }
   draw() {
-    if(this.switch == 0 && this.alpha < 10){
+    let maxAlpha = 100; 
+    if(this.switch == 0 && this.alpha < maxAlpha){
       this.alpha++;
-    }else if(this.switch == 0 && this.alpha >= 10){
-      this.alpha = 10;
+    }else if(this.switch == 0 && this.alpha >= maxAlpha){
+      this.alpha = maxAlpha;
       this.switch = 1;
     }
 
@@ -1011,8 +1019,9 @@ class AnimationTouch10 {
     this.lifetime--;
 
     noStroke();
-    shapeCol.setAlpha(this.alpha);
-    fill('sand');
+    let cornerCircleColor = color(25, 24, 0);
+    cornerCircleColor.setAlpha(this.alpha);
+    fill(cornerCircleColor);
     circle(this.p.x, this.p.y, this.d);
   }
 }
