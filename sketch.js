@@ -143,7 +143,10 @@ function setup(){
 socket.on("data",(data)=>{
   console.log("key: "+data["key"]);
 })
-
+socket.on("touchData",(touchData)=>{
+  animations.push(new AnimationTouch0(width/2, height/2, 0));
+  console.log("touchData:" + touchData);
+})
 }
 
 
@@ -218,8 +221,10 @@ function draw(){
     }
  
      fill (dragCircleCol);
-    ellipse(dragX, dragY, 50, 50);
-
+     if (dragX && dragY){
+      ellipse(dragX, dragY, 50, 50);
+     }
+  
   }
  
 
@@ -508,6 +513,7 @@ function touchStarted() {
       return;
     }
 lastAnimationFrame = frameCount;
+socket.emit("touchData",{mouseX:mouseX, mouseY:mouseY});
 
 
     randomNumber = floor(random(11));

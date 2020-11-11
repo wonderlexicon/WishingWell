@@ -17,6 +17,10 @@ io.sockets.on("connection", (socket)=>{
         console.log("data"+data);
         io.sockets.emit("data",data);
     });
+    socket.on("touchData",(touchData)=>{
+        console.log("touchData"+touchData);
+        socket.broadcast.emit("touchData",touchData);
+    });
     socket.on("disconnect", ()=>{
         console.log("client disconnected"+socket.id);
     })
