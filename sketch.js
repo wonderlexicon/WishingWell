@@ -222,8 +222,7 @@ function setup() {
 
   pixelDensity(2);
 
-  // colorMode(RGB, 100);
-
+  colorMode(RGB, 100);
 
   loadAsset();
 
@@ -282,9 +281,8 @@ let dragX;
 let dragY;
 function draw() {
   if (isLoading == true) {
-  //    fill(0, 2);
-  //  rect(0, 0, width, height);
-    // background(20, 50, 360);
+   
+    background(bkCol);
     noStroke();
     fill(introTxtCol);
     textSize(h4);
@@ -321,20 +319,29 @@ function draw() {
     isStarted = true;
 
     //DRAGGING CIRCLE
-    dragCircleCol = color("navy");
-    dragCircleAlpha -= 5;
-    dragCircleCol.setAlpha(dragCircleAlpha);
-    if (dragStrokeWeight > 0) {
+    //  dragCircleCol = color("navy");
+      dragCircleAlpha -= 5;
+   // dragCircleCol.setAlpha(dragCircleAlpha);
+     if (dragStrokeWeight > 0) {
       dragStrokeWeight -= 0.1;
-      strokeWeight(dragStrokeWeight);
-      stroke("white");
-    } else {
-      noStroke();
-    }
+       strokeWeight(dragStrokeWeight);
+       stroke("white");
+      } else {
+      // noStroke();
+      }
+    // fill(dragCircleCol);
 
-    fill(dragCircleCol);
-    if (dragX && dragY) {
+    // if (dragX && dragY) {
       ellipse(dragX, dragY, 50, 50);
+  {
+    fill(0, 2);
+    rect(0, 0, width, height);
+  
+    fill(255);
+    // noStroke();
+    ellipse(mouseX, mouseY, 20, 20);
+  
+      
     }
   }
 
@@ -486,7 +493,7 @@ function draw() {
 //INTRO TEXT GROUP
 
 let introTextList = [
-  "this is an experiment. \n explore it.  "
+  "this is an experiment \n explore it.  "
   // "THIS IS A MICROCOSM",
   // "MIRROR \n \n PROJECTION",
   // "of",
@@ -506,7 +513,7 @@ function introduction() {
     txtAlpha = 0;
   }
 
- background(20, 100, 20);
+  background(bkCol);
 
   //INTRO TEXT SETUP
   noStroke();
@@ -535,14 +542,11 @@ function introduction() {
 
 function mouseDragged() {
   console.log("dragging?");
-  // dragX = mouseX;
-  // dragY = mouseY;
-  // dragCircleAlpha = 100;
-  // dragStrokeWeight = 4;
+  dragX = mouseX;
+  dragY = mouseY;
+  dragCircleAlpha = 100;
+  dragStrokeWeight = 4;
 
-  stroke(255);
-  strokeWeight(20);
-  line(mouseX, mouseY, pmouseX, pmouseY);
   // prevent default
   return false;
 }
