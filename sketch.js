@@ -41,9 +41,9 @@ let messageList = [
   "a habit is a circle",
   "this is an invitation",
   "an invitation \n is an action that \n encourages something to happen",
-  'a click or a tap is an action',
+  'clicking, pressing, and tapping are examples of action',
   "imagine \n your habit \n is to keep close \n to the line \n made by the circle", 
-  "you are invited \n to take action n\ outside your habit ",
+  "you are invited \n to take action \n outside your habit ",
   // "type the ESC key \n at any time \n to capture the moment",
   "this is a microcosm",
   "a microcosm \n is a tiny version \n of something much larger",
@@ -63,7 +63,7 @@ let messageList = [
   "a trick is an \n indirect \n means to acheive an end",
   "who chose \n the thoughts \n you are thinking \n right now?",
   "what do you \n hear when \n you \n listen to your voice?",
-  "a mirror is \n something \n that faithfully reverberates an essence",
+  "a mirror is \n something \n that reciprocates the quality it receives",
   "this is a mirror",
   'a question is an expression inviting speculation',
   "this is a question",
@@ -83,9 +83,12 @@ let messageList = [
   "where do you keep your secrets",
   "how do you make it all right \n to hide?",
   // "try to follow it here.",
-'this is a conversation',
+'this is a dialogue',
   // "try to follow it here.",
-'a conversation is an exchange of ideas',
+'a dialogue is an exchange of thoughts',
+'this is a relationship',
+'a relationship\n is a connection \n between \n two or more things' ,
+"what is the connection between hope and fear?",
   // "tap around the screen \n or \n type in your response to the prompts",
   "where is your mind now?",
   'this is art',
@@ -94,7 +97,8 @@ let messageList = [
   "why can't temper be found \n in the same place \n we lost it?",
   "how are you sad?",
   "what controls your attention?",
-  
+  'this is a system',
+  'a system is an assemblage \n of parts into \n a more complex whole',
   "what makes you think that \n you know what you know?",
   "do you believe what you see \n more or less \n than what you hear? \n less or more n than what you think?",
   // "do you think its easier to feel anger \n or acknowledge fear?",
@@ -113,7 +117,7 @@ let messageList = [
 'existence is the /n state of being real',
   "are you saving up your laughter for a rainy day?",
   "how are you happy?",
-
+'this is a meditation',
   // "who are trying to impress?",
   "on what do you spend your attention?",
   // 'hello?',
@@ -218,7 +222,8 @@ function setup() {
 
   pixelDensity(2);
 
-  colorMode(RGB, 100);
+  // colorMode(RGB, 100);
+
 
   loadAsset();
 
@@ -235,8 +240,9 @@ function setup() {
     console.log("key: " + data["key"]);
   });
   socket.on("touchData", touchData => {
-    for (let i = 0 ; i<8;i++){
-      animations.push(new AnimationTouch0(width / 2, height / 2, i));  
+    for (let i = 0 ; i<5;i++){
+      // animations.push(new AnimationTouch0(width / 2, height / 2, i));  
+      animations.push(new AnimationTouch7(width/2, height/2, i));  
     }
    
     console.log("touchData:" + touchData);
@@ -276,8 +282,9 @@ let dragX;
 let dragY;
 function draw() {
   if (isLoading == true) {
-   
-    background(bkCol);
+  //    fill(0, 2);
+  //  rect(0, 0, width, height);
+    // background(20, 50, 360);
     noStroke();
     fill(introTxtCol);
     textSize(h4);
@@ -479,7 +486,7 @@ function draw() {
 //INTRO TEXT GROUP
 
 let introTextList = [
-  "this is an experiment. \n tap around the screen, \n click. explore. \n dont think."
+  "this is an experiment. \n explore it.  "
   // "THIS IS A MICROCOSM",
   // "MIRROR \n \n PROJECTION",
   // "of",
@@ -499,7 +506,7 @@ function introduction() {
     txtAlpha = 0;
   }
 
-  background(bkCol);
+ background(20, 100, 20);
 
   //INTRO TEXT SETUP
   noStroke();
@@ -528,11 +535,14 @@ function introduction() {
 
 function mouseDragged() {
   console.log("dragging?");
-  dragX = mouseX;
-  dragY = mouseY;
-  dragCircleAlpha = 100;
-  dragStrokeWeight = 4;
+  // dragX = mouseX;
+  // dragY = mouseY;
+  // dragCircleAlpha = 100;
+  // dragStrokeWeight = 4;
 
+  stroke(255);
+  strokeWeight(20);
+  line(mouseX, mouseY, pmouseX, pmouseY);
   // prevent default
   return false;
 }
@@ -708,7 +718,7 @@ function keyPressed() {
 
 class AnimationTouch0 {
   constructor(x, y, i) {
-    this.maxAlpha = 30;
+    this.maxAlpha = 50;
     this.alpha = random(this.maxAlpha);
     
     this.switch = 0;
@@ -730,7 +740,7 @@ class AnimationTouch0 {
     } else if (this.switch == 1 && this.alpha <= 0) {
       this.alpha = 0;
     }
-    this.d += 3;
+    this.d += 8;
     this.lifetime--;
 
     noFill();
@@ -738,7 +748,7 @@ class AnimationTouch0 {
     fill(shapeCol);
     stroke(shapeCol);
     strokeWeight(this.weight);
-    strokeWeight(1);
+    strokeWeight(3);
     circle(this.p.x, this.p.y, this.d);
   }
 }
@@ -972,7 +982,7 @@ class AnimationTouch6 {
 //ANIMATION 7: hovering fireflies !!!! only want this to show up very seldom!
 class AnimationTouch7 {
   constructor(x, y, i) {
-    this.alpha = random(50);
+    this.alpha = random(100);
     this.switch = 0;
     this.d = random(2);
     this.p = createVector(random(x - 10, x + 10), random(y - 10, y + 10));
@@ -983,7 +993,7 @@ class AnimationTouch7 {
     this.limit = 1.57;
     this.count = this.limit;
     this.dif = i;
-    this.lifetime = 300;
+    this.lifetime = 500;
   }
   draw() {
     if (this.count == this.limit) {
@@ -991,10 +1001,10 @@ class AnimationTouch7 {
       this.step = random(2) > 1 ? this.step_1 : this.step_2;
     }
 
-    if (this.switch == 0 && this.alpha < 80) {
+    if (this.switch == 0 && this.alpha < 100) {
       this.alpha++;
-    } else if (this.switch == 0 && this.alpha >= 80) {
-      this.alpha = 80;
+    } else if (this.switch == 0 && this.alpha >= 100) {
+      this.alpha = 100;
       this.switch = 1;
     }
 
@@ -1166,7 +1176,7 @@ class AnimationCenter1 {
 
     noStroke();
     shapeCol.setAlpha(this.alpha);
-    fill("taupe");
+    fill(shapeCol);
     circle(
       cos(this.a) * this.r + this.p.x,
       sin(this.a) * this.r + this.p.y,
@@ -1216,12 +1226,12 @@ class AnimationCenter2 {
 
 class AnimationTop {
   constructor(i) {
-    this.alpha = random(50);
+    this.alpha = random(100);
     this.switch = 0;
     this.lifetime = 200;
     this.cell = width / 30;
     this.p = createVector(i * this.cell + this.cell / 2, 0);
-    this.d = random(1, 3);
+    this.d = random(1, 5);
     this.v = createVector(0, random(10));
   }
   draw() {
