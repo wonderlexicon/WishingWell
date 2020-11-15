@@ -24,7 +24,7 @@ let lastAnimationFrame;
 let animations = [];
 let messages = [];
 
-let bkCol, shapeCol, goldCol, introTxtCol, circleCol, userTypedColor;
+let bkCol, shapeCol, goldCol, introTxtCol, introTxtCol2, circleCol, userTypedColor;
 
 let dragCircleCol, dragCircleAlpha;
 let dragStrokeWeight;
@@ -32,165 +32,54 @@ let dragStrokeWeight;
 //CREATE LIST OF POSITIONS ON JAMBOARD
 
 let messageList = [
-  // 'this is a mirror of your mind',
-  // 'explore the space',
-  // 'experience the questions',
-  // 'this is a circle',]
+"click around the edges of screen",
+  "this \n is \n Neti-neti",
   "this is a circle",
-  "a circle is a metaphor",
-  "a habit is a circle",
-  "this is an invitation",
-  "an invitation \n is an action that \n encourages something to happen",
-  'clicking, pressing, and tapping are examples of action',
-  "imagine \n your habit \n is to keep close \n to the line \n made by the circle", 
-  "you are invited \n to take action \n outside your habit ",
-  // "type the ESC key \n at any time \n to capture the moment",
-  "this is a microcosm",
-  "a microcosm \n is a tiny version \n of something much larger",
-  // 'a metaphor \n is analogical tool that communicates one thing \n through saying something else',
-  "this is a projection",
-  "a projection is an image \n presented on a surface",
-  // 'experience the questions',
-  "this is a concept ",
-  "a concept \n is an abstract idea",
-  "what fills your mind \n when you imagine emptiness?",
-  "what is the source of \n an unformed thought?",
-  "this is a reflection",
-  "a reflection \n is an effect \n produced \n by an influence.",
-  // "why did you tap the screen?",
-  "this is a trick",
-  "where does \n your mind \n go \n when it \n wanders?",
-  "a trick is an \n indirect \n means to acheive an end",
-  "who chose \n the thoughts \n you are thinking \n right now?",
-  "what do you \n hear when \n you \n listen to your voice?",
-  "a mirror is \n something \n that reciprocates the quality it receives",
-  "this is a mirror",
-  'a question is an expression inviting speculation',
-  "this is a question",
-  "if a somthing has no \n beginning or end, \n is that thing eternal?",
-  "is a reflection of the moon \n less real \n than the moon itself?",
-  "this is a paradox",
-  "a paradox is something that combinines \n contradictory qualities \n to reveal something true",
-  "do you feel your thoughts \n or think your feelings?",
-  "does boredom have a center?",
-  "is a mirror a projection \n or \n a reflection?",
-  "how do you change \n when someone else is watching",
-  "when was the last time you danced in the rain?",
-  "does uncertainty have a weight?",
-  "are forgotten memories \n more \n or less \n real \n than dreams \n you remember? ",
-  "how are you lonely?",
-  "what makes a will free?",
-  "where do you keep your secrets",
-  "how do you make it all right \n to hide?",
-  // "try to follow it here.",
-'this is a dialogue',
-  // "try to follow it here.",
-'a dialogue is an exchange of thoughts',
-'this is a relationship',
+  "a circle is a metaphor", 
+   "a metaphor is a \n non-literal \n use of a \n word, \n image, \n or action ",
+   "a habit is a circle",
+   "what habit is unfolding now?",
+   "this is a mirror",
+   "a mirror is \n something \n that reciprocates \n the quality it receives",
+   "what are you giving?",
+   'this is a relationship',
 'a relationship\n is a connection \n between \n two or more things' ,
-"what is the connection between hope and fear?",
-  // "tap around the screen \n or \n type in your response to the prompts",
-  "where is your mind now?",
-  'this is art',
-  'art is the expression of ideas \n and emotions \n through a physical medium',
-  "how often are you in ecstasy?",
-  "why can't temper be found \n in the same place \n we lost it?",
-  "how are you sad?",
-  "what controls your attention?",
-  'this is a system',
-  'a system is an assemblage \n of parts into \n a more complex whole',
-  "what makes you think that \n you know what you know?",
-  "do you believe what you see \n more or less \n than what you hear? \n less or more n than what you think?",
-  // "do you think its easier to feel anger \n or acknowledge fear?",
-  // "how do you know the \n difference \n between right and wrong?",
-  // 'what do you see when you look in the mirror',
-  "how well do you handle disappointment?",
-  "how well do you handle a pleasant suprise?",
-
+"what is the relationship \n between your posture \n and the screen?",
+"this is an invitation",
+"an invitation \n is an action that \n encourages something to happen",
+'clicking, \n pressing, and \n tapping are examples of action',
+"relaxing,\n giggling, \n and \n deep-breathing \n are other examples of action",
+"you are invited \n to take action \n outside your habit ",
+  "this is a mandala",
+ "a mandala is a \n representation \nof the universe",
+ "is a reflection of the moon \n less real \n than the moon itself?",
+ "a concept is an abstract thought",
+ "this is a concept",
+ "what gives shape to \n an unformed thought?",
+ "this is a question",
+ 'a question is an expression \n inviting speculation',
+ "this is a trick",
+ "a trick is an indirect means to gain an end",
+ "is your reflection a projection or reflection?",
+"this is a secret",
+  "a secret \n is something \n with an aura \n of mystery ",
+  "do you feel your thoughts \n or think your feelings?",
+  "this is a paradox",
+  "a paradox \n is something \n that combinines \n contradictory qualities \n to reveal something true",
   "when you are alone \n in silence \n what do you (not) want to hear?",
-  "how do you choose what you think?",
-  // "how do you choose what you think?",
-  "where does a new thought come from?",
-  "when does an old thought end?",
-  "can you catch it?",
-'this is existence',
-'existence is the /n state of being real',
-  "are you saving up your laughter for a rainy day?",
-  "how are you happy?",
+  "this is a boundary",
+  'a boundary is a line that marks \n the limits\n of an area',
+  'this is existence',
+'existence is the \n state of being real',
+"does uncertainty have a weight?",
+"where do you store your ecstasy?",
 'this is a meditation',
-  // "who are trying to impress?",
-  "on what do you spend your attention?",
-  // 'hello?',
-
-  // "deception, cause, \n effect, you, me, them, \n us, dreams, truth, stillness, nature, then, now, \n betrayal, pretense, profundity, past, \n future, illusion, longing, provokation, propriety, \n truth, sensation, simplicity, pleasure, shame, \n sacrifice, irritation, tradition, \n preference, wonder, absurdity, sanctuary, culture, \n emptiness, mayhem, attention, bullshit, \n discernment, entertainment, thinking, essence, stumbling, learning, \n quality, morality, dogma, science, ego, scrutiny, thought, consideration, \n liberation, debate, beginning, nihilism, recognition, bypassing, \n regard, insight, materialism, cultivation, wisdom, awareness, concern, \n contemplation, stupidity, distraction, assiduity, \n inner, outer, deliberation, diligence, circuiuty, immersion, paradox \n absorption, study, illusion, heedfulness, \n discursiveness, interdependence",
-  "what do you see \n in the mirror?",
-  "what is the metaphor you uncovered?",
-  'did you take the invitation',
-  "what do you think?"
-  // "Did you think about it?"
-//   // 'this is a mirror of your mind',
-//   // 'explore the space',
-//   // 'experience the questions',
-// 'this is a metaphor',
-//   'a metaphor \n is something \n used to represent \n something else',
-//   "this is a projection",
-//   "a projection is an inference \n about the present or future \n derived from \n knowledge or assumptions \n from the past.",
-//   // 'experience the questions',
-//   "this is a concept ",
-//   "a concept \n is a directly conceived \n or intuited object \n of thought", 
-//   "this is a reflection",
-//   "a reflection \n is something that \n is a consequence of \n or arises from \n something else.",
-//   "this is a trick",
-//   "a trick is an indirect means to gain an end",
-//   'a mirror is a reflective surface',
-//   "this is a mirror",
-//   "is a mirror a projection \n or \n a reflection?",
-//   "are forgotten memories \n more \n or less \n real \n than dreams \n you remember? ",
-//   "what is the source of an unformed thought?",
-//   "does uncertainty have a weight?",
-//   "this is a microcosm",
-//   'a microcosm is a small version of something much larger',
-//   "where does your mind go \n when it wanders?",
-//   "what makes will free?",
-//   "do you feel your thoughts \n or think your feelings?",
-//   "who chose \n the thoughts you are thinking \n right now?",
-//   // "try to follow it here.",
-  
-//   'this is an invitation',
-//   "why are you lonely?",
-//   // "tap around the screen \n or \n type in your response to the prompts",
-//   //   "where is your mind now?",
-//   // 'how often are you in ecstasy?',
-//   "can you find temper in the place where you lose it?",
-//   "what controls your attention?",
-//   // 'why are you sad?',
-//   "how do you know what you know?",
-//   "do you believe what you see \n more or less n than what you hear? \n less or more n than what you think?",
-//   "do you think its easier to feel anger or acknowledge fear?",
-//   "how do you know the difference between right and wrong?",
-//   "what does your attention think?",
-//   "where is its center?",
-//   // 'what do you see when you look in the mirror',
-//   // 'how well do you handle disappointment?',
-//   "when was the last time you danced in the rain?",
-//   "when you are all alone in silence where do your thoughts go?",
-//   "How do you know what you think?",
-//   "Where does a new thought come from?",
-//   "When does an old thought end?",
-//   // 'Can you catch it?',
-//   "what fills your mind when you imagine emptiness?",
-//   "What do you hear when you listen to your voice?",
-//   "Where do you keep your n \laughter when you are not using it?",
-//   "why are you angry?",
-//   "Where do you hide your secrets",
-//   // 'Who are trying to impress?',
-//   // 'are you paying attention?',
-//   // 'hello?',
-//   "how do you change when someone else is watching",
-//   "do you use your credentials to hide?",
-//   'If you type the "ESC" key, to save Canvas',
-//   "Why did you tap the screen?",
-//   "Dont think about it"
+"a meditation \n is intentional observation \n of something \ over a period of time",
+"are forgotten memories \n more \n or less \n true\n than dreams \n you remember? ",
+"how do you know \n what you think?",
+"where does \n your mind go \n when it wanders?",
+"how would your body speak?",
+"this is your koan",
 ];
 
 let socket = io();
@@ -250,15 +139,17 @@ function setup() {
 
 // txt = intro font color, shapeCol = automated shapes and font, goldCol=user text
 function colorList(R, G, B) {
-  bkCol = color(0, 0, 17);
+ 
   // shapeCol = color(H, S, 100);
   shapeCol = color("ivory");
   goldCol = color("white");
  userTypedColor = color("green");
   // txtCol = color(H, S, 29);
+  introTxtCol2 = color("midnightblue");
   introTxtCol = color("water");
   circleCol = color("fog");
   circleCol.setAlpha(200);
+  bkCol = color(0, 0, 17);
 }
 
 function sizeList() {
@@ -281,12 +172,14 @@ let dragX;
 let dragY;
 function draw() {
   if (isLoading == true) {
+ 
    
-    background(bkCol);
     noStroke();
+    stroke();
     fill(introTxtCol);
     textSize(h4);
     text("Loading", width / 2, height / 2);
+   
 
     noFill();
     stroke(shapeCol);
@@ -306,26 +199,45 @@ function draw() {
     
    
     introduction();
-
+    function introduction() {
+      if (isTapped == true && txtAlpha < 100) {
+        txtAlpha++;
+      } else if (txtAlpha >= 100) {
+        txtAlpha = 100;
+      }
+    
+      if (isTapped == false && txtAlpha > 0) {
+        txtAlpha -= 5;
+      } else if (isTapped == false && txtAlpha < 0) {
+        txtAlpha = 0;
+      }
+    
+ 
     //CIRCLE SIZE CREATE
-    stroke("beige");
-    strokeWeight(8);
     noFill(circleCol);
+    background(bkCol);
+    stroke("beige");
+    strokeWeight(5);
+
+
+    //if I comment this out, then I get the effect I want with my mouse, but I lose my intro text and chaos with most of the animations. If I keep it commented out I lose the mouse drag effect. 
+
     circle(
       windowWidth / 2,
       windowHeight / 2,
       0.9 * min(windowWidth, windowHeight)
     );
     isStarted = true;
-
+   
+  
     //DRAGGING CIRCLE
     //  dragCircleCol = color("navy");
-      dragCircleAlpha -= 5;
+      dragCircleAlpha -= 0;
    // dragCircleCol.setAlpha(dragCircleAlpha);
      if (dragStrokeWeight > 0) {
-      dragStrokeWeight -= 0.1;
-       strokeWeight(dragStrokeWeight);
-       stroke("white");
+    //   dragStrokeWeight -= 0.1;
+      //  strokeWeight(dragStrokeWeight);
+      //  stroke('midnightblue');
       } else {
       // noStroke();
       }
@@ -337,9 +249,9 @@ function draw() {
     fill(0, 2);
     rect(0, 0, width, height);
   
-    fill(255);
+    fill(25);
     // noStroke();
-    ellipse(mouseX, mouseY, 20, 20);
+    ellipse(mouseX, mouseY, 10, 20);
   
       
     }
@@ -353,7 +265,119 @@ function draw() {
       new MessageCustom(messageList[input], width / 2, height / 2, 600)
     );
   }
-  let textShowTime;
+
+  
+
+  //Random loop of text through message list
+
+  //   if(isPlayScreen == true && frameCount % 300 == 0){
+  //     let myText = messageList[index];
+  //     let textX = random(0, width);
+  //     //MAKE SURE TEXT AND TEXT Y ARE > 0
+  //     // let textX = width/4-200;
+  //     // let textY = height/4;
+  //     let textY = random(0, height);
+  //     let textLifetime = 60;
+  //     messages.push(new MessageCustom(myText, textX, textY, textLifetime));
+  // index++;
+  //   }
+
+  //RANDOM WORD REPEAT horizontal line on top (only random x)
+  // if(isPlayScreen == true && frameCount % 10 == 0){
+  //   let myText = "nIcoleta";
+  //   let textX = random(0, width);
+  //   //MAKE SURE TEXT AND TEXT Y ARE > 0
+  //   // let textX = width/4-200;
+  //   let textY = height/4;
+  //   messages.push(new MessageCustom(myText, textX, textY));
+  // }
+
+  //random word repeat x,y around the screen
+  // if(isPlayScreen == true && frameCount % 10 == 0){
+  //   let myText = "nIcoleta";
+  //   let textX = random(0, width);
+  //   //MAKE SURE TEXT AND TEXT Y ARE > 0
+  //   // let textX = width/4-200;
+  //   // let textY = height/4;
+  //   let textY = random(0, height);
+  //   messages.push(new MessageCustom(myText, textX, textY));
+  // }
+
+
+  if (animations.length > 0) {
+    for (let i = 0; i < animations.length; i++) {
+      push();
+      animations[i].draw();
+      pop();
+
+      if (animations[i].lifetime < 0) {
+        animations.splice(i--, 1);
+      }
+    }
+  }
+
+  if (messages.length > 0) {
+    for (let i = 0; i < messages.length; i++) {
+      messages[i].draw();
+      if (messages[i].lifetime < 0) {
+        messages.splice(i, 1);
+      }
+    }
+  }
+
+  //  noStroke();
+  //  fill(255);
+  //  textSize(h1);
+  //  text(messageList[0], width / 2, height / 2-h1);
+  //  textSize(h3);
+  //  text(messageList[4], width / 2, height / 2 + h1*2);
+}
+
+
+
+//INTRO TEXT GROUP
+
+
+
+
+  //INTRO TEXT SETUP
+
+  noStroke();
+  textSize(h1);
+  introTxtCol.setAlpha(txtAlpha);
+  fill(introTxtCol);
+  text(introTextList[0], width / 2, height / 2 - h1 * 4.5);
+  // text(introTextList[2], width/2, height/2-h3*2);
+
+  textSize(h3); 
+  // introTxtCol.setAlpha(txtAlpha-200);
+  fill(introTxtCol2);
+  text(introTextList[2], width / 2, height / 2 + h4 + 2);
+  text(introTextList[3], width / 2, height / 2 + h1);
+  
+
+  textSize(h3);
+  // text(introTextList[1], width / 2, height / 2 - h1 * 2.5);
+  // text(introTextList[2], width / 2, height / 2 + h1);
+  text(introTextList[1], width / 2, height / 2 + h4 * 1);
+
+  textSize(h4);
+  text(introTextList[1], width / 2, height / 2 + h1 * 4);
+  // text(introTextList[5], width/2, height/2);
+
+}
+
+let introTextList = [
+  "Neti-neti \n is a \n Sanskrit expression.\n \n It means: \n  Not this, not that, \n or \n 'Neither this, nor that.'",
+  "",
+  "",
+  "",
+  "",
+  ];
+  
+  
+
+let textShowTime;
   if (isPlayScreen == true) {
     // console.log(frameCount);
     textShowTime = 25;
@@ -372,7 +396,7 @@ function draw() {
 
     textShowTime = 100;
     if (frameCount == textShowTime) {
-      let myText = "WAKEUP";
+      let myText = "OUTSIDE";
 
       let textX = 400;
 
@@ -426,120 +450,6 @@ function draw() {
     //   }
   }
 
-  //Random loop of text through message list
-
-  //   if(isPlayScreen == true && frameCount % 300 == 0){
-  //     let myText = messageList[index];
-  //     let textX = random(0, width);
-  //     //MAKE SURE TEXT AND TEXT Y ARE > 0
-  //     // let textX = width/4-200;
-  //     // let textY = height/4;
-  //     let textY = random(0, height);
-  //     let textLifetime = 60;
-  //     messages.push(new MessageCustom(myText, textX, textY, textLifetime));
-  // index++;
-  //   }
-
-  //RANDOM WORD REPEAT horizontal line on top (only random x)
-  // if(isPlayScreen == true && frameCount % 10 == 0){
-  //   let myText = "nIcoleta";
-  //   let textX = random(0, width);
-  //   //MAKE SURE TEXT AND TEXT Y ARE > 0
-  //   // let textX = width/4-200;
-  //   let textY = height/4;
-  //   messages.push(new MessageCustom(myText, textX, textY));
-  // }
-
-  //random word repeat x,y around the screen
-  // if(isPlayScreen == true && frameCount % 10 == 0){
-  //   let myText = "nIcoleta";
-  //   let textX = random(0, width);
-  //   //MAKE SURE TEXT AND TEXT Y ARE > 0
-  //   // let textX = width/4-200;
-  //   // let textY = height/4;
-  //   let textY = random(0, height);
-  //   messages.push(new MessageCustom(myText, textX, textY));
-  // }
-
-  if (animations.length > 0) {
-    for (let i = 0; i < animations.length; i++) {
-      push();
-      animations[i].draw();
-      pop();
-
-      if (animations[i].lifetime < 0) {
-        animations.splice(i--, 1);
-      }
-    }
-  }
-
-  if (messages.length > 0) {
-    for (let i = 0; i < messages.length; i++) {
-      messages[i].draw();
-      if (messages[i].lifetime < 0) {
-        messages.splice(i, 1);
-      }
-    }
-  }
-
-  //  noStroke();
-  //  fill(255);
-  //  textSize(h1);
-  //  text(messageList[0], width / 2, height / 2-h1);
-  //  textSize(h3);
-  //  text(messageList[4], width / 2, height / 2 + h1*2);
-}
-
-//INTRO TEXT GROUP
-
-let introTextList = [
-  "this is an experiment \n explore it.  "
-  // "THIS IS A MICROCOSM",
-  // "MIRROR \n \n PROJECTION",
-  // "of",
-  // "deception, cause, effect, you, me, them, us, dreams, truth, stillness, nature, then, now, \n betrayal, pretense, profundity, past, future, illusion, longing, provokation, propriety, \n truth, sensation, simplicity, pleasure, shame, sacrifice, irritation, tradition, \n preference, sex, wonder, absurdity, sanctuary, culture, emptiness, mayhem, attention, bullshit, \n discernment, entertainment, thinking, essence, stumbling, learning, \n quality, morality, dogma, science, ego, scrutiny, thought, consideration, \n liberation, debate, beginning, nihilism, recognition, bypassing, \n regard, insight, materialism, cultivation, wisdom, awareness, concern, \n contemplation, stupidity, distraction, assiduity, \n inner, outer, deliberation, diligence, circuiuty, immersion, paradox \n absorption, study, illusion, heedfulness, \n discursiveness, interdependence",
-];
-
-function introduction() {
-  if (isTapped == true && txtAlpha < 100) {
-    txtAlpha++;
-  } else if (txtAlpha >= 100) {
-    txtAlpha = 100;
-  }
-
-  if (isTapped == false && txtAlpha > 0) {
-    txtAlpha -= 5;
-  } else if (isTapped == false && txtAlpha < 0) {
-    txtAlpha = 0;
-  }
-
-  background(bkCol);
-
-  //INTRO TEXT SETUP
-  noStroke();
-  textSize(h1);
-  introTxtCol.setAlpha(txtAlpha);
-  fill(introTxtCol);
-  text(introTextList[0], width / 2, height / 2 - h1 * 1.5);
-  // text(introTextList[2], width/2, height/2-h3*2);
-
-  textSize(h2); 
-  // introTxtCol.setAlpha(txtAlpha-200);
-  fill(goldCol);
-  text(introTextList[1], width / 2, height / 2 - h1 * 2.5);
-  text(introTextList[2], width / 2, height / 2 + h1);
-  
-
-  textSize(h3);
-  // text(introTextList[1], width / 2, height / 2 - h1 * 2.5);
-  // text(introTextList[2], width / 2, height / 2 + h1);
-  text(introTextList[3], width / 2, height / 2 + h1 * 2);
-
-  textSize(h4);
-  text(introTextList[4], width / 2, height / 2 + h1 * 4);
-  // text(introTextList[5], width/2, height/2);
-}
-
 function mouseDragged() {
   console.log("dragging?");
   dragX = mouseX;
@@ -560,8 +470,10 @@ function touchStarted() {
     isPlayScreen = true;
   }
 
+
   if (isPlayScreen == true) {
-    colorList(0, 0);
+    colorList(100, 100);
+
 
     if (mouseY < height / 10) {
       for (let i = 0; i < 30; i++) {
@@ -576,6 +488,7 @@ function touchStarted() {
     } else if (mouseX > (width / 10) * 9) {
       for (let i = 0; i < 5; i++) {
         // animations.push(new AnimationRight(i));
+   
       }
     }
 
@@ -607,7 +520,7 @@ function touchStarted() {
     }
     lastAnimationFrame = frameCount;
     socket.emit("touchData", { mouseX: mouseX, mouseY: mouseY });
-
+   
 // randomNumber = 7
     randomNumber = floor(random(10));
     //ANIMATION0
@@ -621,6 +534,7 @@ function touchStarted() {
       }
     }
 
+ 
     //ANIMATION1
     else if (randomNumber == 1) {
       //   // Add an initial set of boids into the system
@@ -1230,12 +1144,12 @@ class AnimationCenter2 {
 
 class AnimationTop {
   constructor(i) {
-    this.alpha = random(100);
+    this.alpha = random(80);
     this.switch = 0;
     this.lifetime = 200;
     this.cell = width / 30;
     this.p = createVector(i * this.cell + this.cell / 2, 0);
-    this.d = random(1, 5);
+    this.d = random(.5, 6);
     this.v = createVector(0, random(10));
   }
   draw() {
