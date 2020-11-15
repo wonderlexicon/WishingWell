@@ -40,8 +40,8 @@ let messageList = [
    "a habit is a circle",
    "what habit is unfolding?",
    "this is a mirror",
-   "a mirror is \n an instrument \n of direct reciprocation",
-   "what is the mirror n\ reciprocating?",
+   "a mirror is \n an instrument \n of qualitative reciprocation",
+   "how is n\ your quality reflected?",
    'this is a dialogue',
    'a dialogue is an exchange of ideas',
   'a dialogue is a relationship',
@@ -69,7 +69,9 @@ let messageList = [
   "do you feel your thoughts \n or think your feelings?",
   "this is a paradox",
   "a paradox \n is something \n that combinines \n contradictory qualities \n to reveal something true",
-  "when you are alone \n in silence \n what do you (not) want to hear?",
+  "when you sit alone \n in silence \n whose voices do you hear?",
+  "this is a ripple",
+  "a ripple is a \n particular \n effect \n that spreads \n through someone \n or something",
   'this is existence',
 'existence is a \n state of animation',
 "does uncertainty have a pace?",
@@ -86,7 +88,7 @@ let messageList = [
 "where does \n your mind go \n when it wanders?",
 "how does your body speak?",
 'this is eternity',
-'eternity is a state to which time has no application',
+'eternity \n is a state \n to which \n time \nhas no application',
 'press ESC to capture ETERNITY',
 "this is a boundary",
 'a boundary \n is a line that marks \n the limits\n of an area',
@@ -1166,11 +1168,50 @@ class AnimationDragged {
   constructor(x, y) {
     this.x=x;
     this.y=y;
+    this.alpha = random(80);
+    this.switch = 1;
+    this.lifetime = 20;
+    this.cell = width / 40;
+    // this.p = createVector(i * this.cell + this.cell / 2, 0);
+    this.d = (.5, 6);
+  
   }
   draw(){
-    fill(shapeCol);
+    fill(shapeCol, 0);
     let circleSize = 20;
     circle(this.x, this.y, circleSize);
+    // this.alpha++;
+    // this.switch = 0;
+   
+    // this.a += 0.04;
+
+    if (this.switch == 0 && this.alpha < 100) {
+      this.alpha++;
+    } else if (this.switch == 0 && this.alpha >= 100) {
+      this.alpha = 100;
+      this.switch = 1;
+    }
+
+    if (this.switch == 1 && this.alpha > 0) {
+      this.alpha -= 0.5;
+    } else if (this.switch == 1 && this.alpha <= 0) {
+      this.alpha = 0;
+    }
+
+    // this.p.sub(this.v);
+    this.lifetime--;
+
+    if (this.c == 0) {
+      noStroke();
+      shapeCol.setAlpha(this.alpha);
+      fill(shapeCol);
+    } else if (this.c == 1) {
+      noFill();
+      shapeCol.setAlpha(this.alpha);
+      stroke(shapeCol);
+    }
+
+    // circle(sin(this.a * this.v.y) * 3 + this.p.x, this.p.y, this.d);
 
   }
 }
