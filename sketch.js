@@ -41,7 +41,7 @@ let messageList = [
    "what habit is unfolding?",
    "this is a mirror",
    "a mirror is \n an instrument \n of direct reciprocation",
-   "what is the mirror n\reciprocating?",
+   "what is the mirror n\ reciprocating?",
    'this is a dialogue',
    'a dialogue is an exchange of ideas',
   'a dialogue is a relationship',
@@ -165,7 +165,7 @@ function colorList(R, G, B) {
   introTxtCol = color("water");
   circleCol = color("fog");
   circleCol.setAlpha(200);
-  bkCol = color(0, 0, 17);
+  bkCol = color(0, 0, 17, );
 }
 
 function sizeList() {
@@ -186,6 +186,64 @@ let input = -1;
 let index = 0;
 let dragX;
 let dragY;
+
+function introduction() {
+  if (isTapped == true && txtAlpha < 100) {
+    txtAlpha++;
+  } else if (txtAlpha >= 100) {
+    txtAlpha = 100;
+  }
+
+  if (isTapped == false && txtAlpha > 0) {
+    txtAlpha -= 5;
+  } else if (isTapped == false && txtAlpha < 0) {
+    txtAlpha = 0;
+  }
+
+
+//CIRCLE SIZE CREATE
+noFill(circleCol);
+background(bkCol);
+stroke("beige");
+strokeWeight(5);
+
+
+//if I comment this out, then I get the effect I want with my mouse, but I lose my intro text and chaos with most of the animations. If I keep it commented out I lose the mouse drag effect. 
+
+circle(
+  windowWidth / 2,
+  windowHeight / 2,
+  0.9 * min(windowWidth, windowHeight)
+);
+isStarted = true;
+
+
+//DRAGGING CIRCLE
+//  dragCircleCol = color("navy");
+  dragCircleAlpha -= 0;
+// dragCircleCol.setAlpha(dragCircleAlpha);
+ if (dragStrokeWeight > 0) {
+//   dragStrokeWeight -= 0.1;
+  //  strokeWeight(dragStrokeWeight);
+  //  stroke('midnightblue');
+  } else {
+  // noStroke();
+  }
+// fill(dragCircleCol);
+
+// if (dragX && dragY) {
+  ellipse(dragX, dragY, 50, 50);
+{
+// fill(0, 2);
+// rect(0, 0, width, height);
+
+// fill(25);
+// noStroke();
+ellipse(mouseX, mouseY, 10, 20);
+
+  
+}
+}
 function draw() {
   if (isLoading == true) {
  
@@ -215,63 +273,7 @@ function draw() {
     
    
     introduction();
-    function introduction() {
-      if (isTapped == true && txtAlpha < 100) {
-        txtAlpha++;
-      } else if (txtAlpha >= 100) {
-        txtAlpha = 100;
-      }
-    
-      if (isTapped == false && txtAlpha > 0) {
-        txtAlpha -= 5;
-      } else if (isTapped == false && txtAlpha < 0) {
-        txtAlpha = 0;
-      }
-    
- 
-    //CIRCLE SIZE CREATE
-    noFill(circleCol);
-    background(bkCol);
-    stroke("beige");
-    strokeWeight(5);
 
-
-    //if I comment this out, then I get the effect I want with my mouse, but I lose my intro text and chaos with most of the animations. If I keep it commented out I lose the mouse drag effect. 
-
-    circle(
-      windowWidth / 2,
-      windowHeight / 2,
-      0.9 * min(windowWidth, windowHeight)
-    );
-    isStarted = true;
-   
-  
-    //DRAGGING CIRCLE
-    //  dragCircleCol = color("navy");
-      dragCircleAlpha -= 0;
-   // dragCircleCol.setAlpha(dragCircleAlpha);
-     if (dragStrokeWeight > 0) {
-    //   dragStrokeWeight -= 0.1;
-      //  strokeWeight(dragStrokeWeight);
-      //  stroke('midnightblue');
-      } else {
-      // noStroke();
-      }
-    // fill(dragCircleCol);
-
-    // if (dragX && dragY) {
-      ellipse(dragX, dragY, 50, 50);
-  {
-    fill(0, 2);
-    rect(0, 0, width, height);
-  
-    fill(25);
-    // noStroke();
-    ellipse(mouseX, mouseY, 10, 20);
-  
-      
-    }
-  }
 
   if (isPlayScreen == true && frameCount % 300 == 0) {
     input < messageList.length ? input++ : (input = 0);
@@ -467,11 +469,14 @@ let textShowTime;
   }
 
 function mouseDragged() {
+  // background (bkCol, 2);
   console.log("dragging?");
   dragX = mouseX;
   dragY = mouseY;
   dragCircleAlpha = 100;
   dragStrokeWeight = 4;
+  animations.push(new AnimationDragged(mouseX, mouseY));
+ 
 
   // prevent default
   return false;
@@ -492,7 +497,7 @@ function touchStarted() {
 
 
     if (mouseY < height / 10) {
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 55; i++) {
         animations.push(new AnimationTop(i));
       }
     } else if (mouseY > (height / 10) * 9) {
@@ -656,7 +661,7 @@ class AnimationTouch0 {
     this.alpha = random(this.maxAlpha);
     
     this.switch = 0;
-    this.lifetime = 600;
+    this.lifetime = 800;
     this.p = createVector(x, y);
     this.d = random(100);
     this.weight = i + 1;
@@ -1157,13 +1162,24 @@ class AnimationCenter2 {
     );
   }
 }
+class AnimationDragged {
+  constructor(x, y) {
+    this.x=x;
+    this.y=y;
+  }
+  draw(){
+    fill(shapeCol);
+    let circleSize = 20;
+    circle(this.x, this.y, circleSize);
 
+  }
+}
 class AnimationTop {
   constructor(i) {
     this.alpha = random(80);
     this.switch = 0;
     this.lifetime = 200;
-    this.cell = width / 30;
+    this.cell = width / 40;
     this.p = createVector(i * this.cell + this.cell / 2, 0);
     this.d = random(.5, 6);
     this.v = createVector(0, random(10));
