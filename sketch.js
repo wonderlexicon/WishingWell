@@ -241,12 +241,13 @@ isStarted = true;
 //DRAGGING CIRCLE
 
   dragCircleAlpha -= 100;
-  dragCircleCol = color(250,248,230);
+  // dragCircleCol = color(250,248,230);
+  dragCircleCol = color(25, 25, 112, 0);
  dragCircleCol.setAlpha(dragCircleAlpha);
  if (dragStrokeWeight > 0) {
   //  dragStrokeWeight -= 1;
    strokeWeight(dragStrokeWeight);
-    stroke("navy");
+     stroke(25, 25, 12);
   } else {
    noStroke();
   }
@@ -1333,7 +1334,7 @@ class AnimationLeft {
     this.switch = 0;
     this.lifetime = 300;
     this.cell = height / 20;
-    this.d = random(1, 2);
+    this.d = random(.5, 8);
     this.p = createVector(this.d / 2, i * this.cell + this.cell / 2);
     this.v = createVector(random(0.5, 8), 0);
   }
@@ -1361,8 +1362,9 @@ class AnimationLeft {
 
     this.lifetime--;
     noStroke();
+    strokeWeight(2);
     shapeCol.setAlpha(this.alpha);
-    fill(shapeCol);
+    fill("beige");
     circle(this.p.x, this.p.y, this.d);
   }
 }
@@ -1397,7 +1399,8 @@ class AnimationRight {
     this.lifetime--;
     noStroke();
     shapeCol.setAlpha(this.alpha);
-    fill(shapeCol);
+   strokeWeight(2);
+    fill("beige");
     circle(this.p.x, this.p.y, this.cell / 4);
   }
 }
@@ -1428,8 +1431,8 @@ class AnimationType {
     this.lifetime--;
 
     noStroke();
-    goldCol.setAlpha(this.alpha);
-    fill(goldCol);
+    shapeCol.setAlpha(this.alpha);
+    fill(shapeCol);
     textSize(this.d);
     text(this.myMessage, this.p.x, this.p.y);
   }
