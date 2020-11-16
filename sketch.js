@@ -45,7 +45,7 @@ let messageList = [
    "a ripple is evidence \n of change \n spreading \n through someone \n or something",
    "this is a mirror",
    "a mirror is \n an instrument \n of qualitative reciprocation",
-   "what \n quality does time \ n reflect?",
+   "what \n quality does time \n reflect?",
    "this is a mandala",
    "a mandala is a \n representation \n of the universe",
    "",
@@ -394,7 +394,7 @@ function draw() {
   //INTRO TEXT SETUP
 
   noStroke();
-  textSize(h1);
+  textSize(h3);
   introTxtCol.setAlpha(txtAlpha);
   fill(introTxtCol);
   text(introTextList[0], width / 2, height / 2 - h1 * 4.5);
@@ -419,7 +419,7 @@ function draw() {
 }
 
 let introTextList = [
-  "Neti-neti \n is a \n Sanskrit expression.\n \n It means: \n  Not this, not that, \n or \n 'Neither this, nor that.'",
+  "Neti-neti \n is a \n Sanskrit expression.\n \n \n \n It means: \n  Not this, not that, \n or \n 'Neither this, nor that.' \n \n \n A koan is a form of Zen Buddhist contemplation. \n \n Koans exhaust the anyalytic mind \n to   create   space \n for \n sudden \n Enlightenment.",
   "",
   "right now",
   "",
