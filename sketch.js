@@ -53,7 +53,7 @@ let messageList = [
   'existence is a \n state of animation',
   'this is eternity',
 'eternity \n is a state \n to which \n time \n has no application',
-'press ESC to capture ETERNITY',
+'press ESC at any time to capture ETERNITY',
 "this is a boundary",
 'a boundary \n is a line that marks \n the limits\n of an area',
 "this is a concept",
@@ -176,11 +176,11 @@ function setup() {
 function colorList(R, G, B) {
  
   // shapeCol = color(H, S, 100);
-  shapeCol = color("ivory");
+  shapeCol = color("white");
   goldCol = color("white");
 //  userTypedColor = color("green");
   // txtCol = color("beige");
-  introTxtCol = color("ivory");
+  introTxtCol = color("beige");
   circleCol = color('beige');
   circleCol.setAlpha(200);
   introTxtCol2 = color(37, 5, 245);
@@ -576,15 +576,17 @@ function touchStarted() {
     lastAnimationFrame = frameCount;
     socket.emit("touchData", { mouseX: mouseX, mouseY: mouseY });
    
-// randomNumber = 7
-    randomNumber = floor(random(10));
+randomNumber = 0
+    // randomNumber = floor(random(10));
     //ANIMATION0
     // for(let i = 0; i < 3; i++){
     //   animations.push(new AnimationTouch0(mouseX, mouseY, i));
     // }
 
     if (randomNumber == 0) {
-      for (let i = 0; i < 1; i++) {
+      let numRipples = 3;
+
+      for (let i = 0; i < numRipples; i++) {
         animations.push(new AnimationTouch0(mouseX, mouseY, i));
       }
     }
@@ -685,7 +687,7 @@ function keyTyped() {
 
 function keyPressed() {
   if (keyCode === ESCAPE) {
-    saveCanvas("THEN WAS NOW.", "png");
+    saveCanvas("ETERNITY IS NOW.", "png");
   }
 }
 
@@ -695,7 +697,7 @@ class AnimationTouch0 {
     this.alpha = random(this.maxAlpha);
     
     this.switch = 1;
-    this.lifetime = 200;
+    this.lifetime = 300;
     this.p = createVector(x, y);
     this.d = random(100);
     this.weight = i + 1;
@@ -1200,7 +1202,7 @@ class AnimationDragged {
   constructor(x, y) {
     this.x=x;
     this.y=y;
-    this.alpha = random(80);
+    this.alpha = (80);
     // this.switch = 1;
     this.lifetime = 100;
     this.cell = width / 40;
@@ -1209,20 +1211,20 @@ class AnimationDragged {
   
   }
   draw(){
-    fill(bkCol);
+    let mouseDragCol = color("white");
+mouseDragCol.setAlpha(this.alpha);
+    fill(mouseDragCol);
     let circleSize = 20;
+    noStroke();
     circle(this.x, this.y, circleSize);
     // this.alpha++;
     // this.switch = 0;
    
     // this.a += 0.04;
+let fadeOutRate = 2;
 
-    if (this.switch == 0 && this.alpha < 100) {
-      this.alpha++;
-    } else if (this.switch == 0 && this.alpha >= 100) {
-      this.alpha = 200;
-      // this.switch = 1;
-    }
+
+     this.alpha -= fadeOutRate;
 
     // if (this.switch == 1 && this.alpha > 0) {
     //   this.alpha -= 0.5;
