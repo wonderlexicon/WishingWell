@@ -24,10 +24,11 @@ let lastAnimationFrame;
 let animations = [];
 let messages = [];
 
-let bkCol, shapeCol, goldCol, introTxtCol, introTxtCol2, circleCol, userTypedColor;
+let bkCol, shapeCol, goldCol, introTxtCol, circleCol,  introTxtCol2, userTypedColor;
 
 let dragCircleCol, dragCircleAlpha;
 let dragStrokeWeight;
+
 
 //CREATE LIST OF POSITIONS ON JAMBOARD
 
@@ -41,7 +42,7 @@ let messageList = [
    "what habit is unfolding?",
    "this is a mirror",
    "a mirror is \n an instrument \n of qualitative reciprocation",
-   "how is n\ your quality reflected?",
+   "how is \n your quality reflected?",
    'this is a dialogue',
    'a dialogue is an exchange of ideas',
   'a dialogue is a relationship',
@@ -49,8 +50,8 @@ let messageList = [
 "what is \n the relationship \n between your posture \n and the screen?",
 "this is an invitation",
 "an invitation \n is an action that \n encourages something to happen",
-'clicking, \n pressing, and \n tapping are examples of action',
-"relaxing,\n giggling, \n and \n deep-breathing \n are other examples of action",
+'clicking, \n tapping and \n dragging \n your mouse \n are encouraged actions',
+"scowling, \n extreme sighing, \n and curling the outer corners \n of your mouth \n downward \n are less encouraged actions",
 "you are invited \n to take action \n outside your habit ",
   "this is a mandala",
  "a mandala is a \n representation \n of the universe",
@@ -61,6 +62,7 @@ let messageList = [
  "what gives shape to \n an unformed thought?",
  "this is a question",
  'a question is an expression \n inviting speculation',
+ 'when will you get to the end of the circle?',
  "this is a trick",
  "a trick \n is an indirect means to gain an end",
  "is your reflection a projection or reflection?",
@@ -75,7 +77,7 @@ let messageList = [
   'this is existence',
 'existence is a \n state of animation',
 "does uncertainty have a pace?",
-"where did you \n look to find an answer?",
+"where are you \n looking for an answer?",
 "what is the \n rhythym \n of your your ecstasy?",
 'this is an exploration',
 'exploration is a \n roundabout \n approach to discovery',
@@ -105,18 +107,8 @@ socket.on("connect", () => {
   console.log("connected!");
 });
 
-function loadAsset() {
-  textFont("Poiret One");
-
-  function assetLoaded() {
-    // assetCounter++;
-    // if(assetCounter == assetNumber) {
-    isLoading = false;
-    // }
-  }
-}
-
 let startTime = new Date().getTime()/1000;
+// const radius = 100;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -129,10 +121,21 @@ function setup() {
 
   pixelDensity(2);
 
-  colorMode(RGB, 100);
+  // colorMode(RGB, 100);
 
   loadAsset();
 
+  function loadAsset() {
+    textFont("Poiret One");
+  
+    function assetLoaded() {
+      // assetCounter++;
+      // if(assetCounter == assetNumber) {
+      isLoading = false;
+      // }
+    }
+  }
+   
   textAlign(CENTER);
 
   isStarted = false;
@@ -141,7 +144,7 @@ function setup() {
 
   sizeList();
 
-  colorList(0, 0);
+   colorList(100, 100);
   socket.on("data", data => {
     console.log("key: " + data["key"]);
   });
@@ -161,13 +164,13 @@ function colorList(R, G, B) {
   // shapeCol = color(H, S, 100);
   shapeCol = color("ivory");
   goldCol = color("white");
- userTypedColor = color("green");
-  // txtCol = color(H, S, 29);
-  introTxtCol2 = color("midnightblue");
-  introTxtCol = color("water");
-  circleCol = color("fog");
+//  userTypedColor = color("green");
+  // txtCol = color("beige");
+  introTxtCol = color("ivory");
+  circleCol = color('beige');
   circleCol.setAlpha(200);
-  bkCol = color(0, 0, 17, );
+  introTxtCol2 = color(37, 5, 245);
+  bkCol = color(0, 0, 17);
 }
 
 function sizeList() {
@@ -180,7 +183,7 @@ function sizeList() {
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+  resizeCanvas(windowWidth, windowHeight,);
   sizeList();
 }
 
@@ -204,7 +207,8 @@ function introduction() {
 
 
 //CIRCLE SIZE CREATE
-noFill(circleCol);
+// noFill(circleCol);
+noStroke();
 background(bkCol);
 stroke("beige");
 strokeWeight(5);
@@ -221,27 +225,28 @@ isStarted = true;
 
 
 //DRAGGING CIRCLE
-//  dragCircleCol = color("navy");
-  dragCircleAlpha -= 0;
-// dragCircleCol.setAlpha(dragCircleAlpha);
+
+  dragCircleAlpha -= 100;
+  dragCircleCol = color(250,248,230);
+ dragCircleCol.setAlpha(dragCircleAlpha);
  if (dragStrokeWeight > 0) {
-//   dragStrokeWeight -= 0.1;
-  //  strokeWeight(dragStrokeWeight);
-  //  stroke('midnightblue');
+  //  dragStrokeWeight -= 1;
+   strokeWeight(dragStrokeWeight);
+    stroke("navy");
   } else {
-  // noStroke();
+   noStroke();
   }
-// fill(dragCircleCol);
+//  fill(dragCircleCol);
 
 // if (dragX && dragY) {
-  ellipse(dragX, dragY, 50, 50);
+  ellipse(dragX, dragY);
 {
-// fill(0, 2);
-// rect(0, 0, width, height);
+ fill(0, 2);
+ rect(0, 0, width, height);
 
 // fill(25);
 // noStroke();
-ellipse(mouseX, mouseY, 10, 20);
+ellipse(mouseX, mouseY, 1, 2);
 
   
 }
@@ -255,12 +260,24 @@ function draw() {
     fill(introTxtCol);
     textSize(h4);
     text("Loading", width / 2, height / 2);
-   
+
+  //   function draw() {
+  //  noStroke();
+  //      background();
+  //     const dirY = (windowWidth / 2 - 0.5) * 4;
+  //     const dirX = (windowHeight / wi2dth - 0.5) * 4;
+  //     directionalLight(2, 2, 2, dirX, dirY, 1);
+  //     translate(5 * radius, 0, 0);
+  //     // sphere(radius);
+  //     // translate(3 * radius, 0, 0);
+  //     // sphere(radius);
+  //   }
+    
 
     noFill();
     stroke(shapeCol);
     arc(
-      width / 2,
+      width / 2, 
       height / 2,
       newSize / 5,
       newSize / 5,
@@ -369,7 +386,7 @@ function draw() {
   text(introTextList[0], width / 2, height / 2 - h1 * 4.5);
   // text(introTextList[2], width/2, height/2-h3*2);
 
-  textSize(h1); 
+  textSize(h2); 
   // introTxtCol.setAlpha(txtAlpha-200);
   fill(introTxtCol2);
   text(introTextList[2], width / 2, height / 2 - h1 * 2);
@@ -471,12 +488,12 @@ let textShowTime;
   }
 
 function mouseDragged() {
-  // background (bkCol, 2);
+   background (bkCol);
   console.log("dragging?");
   dragX = mouseX;
   dragY = mouseY;
   dragCircleAlpha = 100;
-  dragStrokeWeight = 4;
+  dragStrokeWeight = 1;
   animations.push(new AnimationDragged(mouseX, mouseY));
  
 
@@ -537,7 +554,7 @@ function touchStarted() {
     //clicktop = rain, click left outward dots, click bottom = quiet radiance, click right?
   
 
-    let coolDownTime = 75;
+    let coolDownTime = 50;
     if (lastAnimationFrame > frameCount - coolDownTime) {
       return;
     }
@@ -1169,15 +1186,15 @@ class AnimationDragged {
     this.x=x;
     this.y=y;
     this.alpha = random(80);
-    this.switch = 1;
-    this.lifetime = 20;
+    // this.switch = 1;
+    this.lifetime = 100;
     this.cell = width / 40;
     // this.p = createVector(i * this.cell + this.cell / 2, 0);
-    this.d = (.5, 6);
+    this.d = (.5, 4);
   
   }
   draw(){
-    fill(shapeCol, 0);
+    fill(bkCol);
     let circleSize = 20;
     circle(this.x, this.y, circleSize);
     // this.alpha++;
@@ -1188,27 +1205,27 @@ class AnimationDragged {
     if (this.switch == 0 && this.alpha < 100) {
       this.alpha++;
     } else if (this.switch == 0 && this.alpha >= 100) {
-      this.alpha = 100;
-      this.switch = 1;
+      this.alpha = 200;
+      // this.switch = 1;
     }
 
-    if (this.switch == 1 && this.alpha > 0) {
-      this.alpha -= 0.5;
-    } else if (this.switch == 1 && this.alpha <= 0) {
-      this.alpha = 0;
-    }
+    // if (this.switch == 1 && this.alpha > 0) {
+    //   this.alpha -= 0.5;
+    // } else if (this.switch == 1 && this.alpha <= 0) {
+    //   this.alpha = 0;
+    // }
 
     // this.p.sub(this.v);
     this.lifetime--;
 
     if (this.c == 0) {
       noStroke();
-      shapeCol.setAlpha(this.alpha);
-      fill(shapeCol);
+      bkCol.setAlpha(this.alpha);
+      fill(bkCol);
     } else if (this.c == 1) {
       noFill();
-      shapeCol.setAlpha(this.alpha);
-      stroke(shapeCol);
+      bkCol.setAlpha(this.alpha);
+      stroke(bkCol);
     }
 
     // circle(sin(this.a * this.v.y) * 3 + this.p.x, this.p.y, this.d);
@@ -1217,7 +1234,7 @@ class AnimationDragged {
 }
 class AnimationTop {
   constructor(i) {
-    this.alpha = random(80);
+    this.alpha = random(100);
     this.switch = 0;
     this.lifetime = 200;
     this.cell = width / 40;
@@ -1233,7 +1250,7 @@ class AnimationTop {
       this.switch = 1;
     }
 
-    if (this.switch == 1 && this.alpha > 0) {
+    if (this.switch == 0 && this.alpha > 0) {
       this.alpha--;
     } else if (this.switch == 1 && this.alpha <= 0) {
       this.alpha = 0;
@@ -1243,7 +1260,7 @@ class AnimationTop {
     this.lifetime--;
     noStroke();
     shapeCol.setAlpha(this.alpha);
-    fill(shapeCol);
+    fill(238, 245, 244);
     circle(this.p.x, this.p.y + this.d, this.d / 3);
     circle(this.p.x, this.p.y + this.d * 2, this.d / 2);
     circle(this.p.x, this.p.y + this.d * 4, this.d);
@@ -1408,13 +1425,13 @@ class AnimationType {
 class Message1 {
   constructor(input) {
     this.alpha = 0;
-    this.switch = 0;
-    this.lifetime = 400;
+    this.switch = 2;
+    this.lifetime = 600;
     this.p = createVector(width / 2, height / 2);
-    this.topText = messageList[input];
-    this.bottomText = messageList[input + 1];
+    this.topText = messageList[input + 2];
+    this.bottomText = messageList[input - 2];
 
-    // this.message =
+    this.message = 2
   }
 
   //
@@ -1423,12 +1440,12 @@ class Message1 {
     if (this.switch == 0 && this.alpha < 300) {
       this.alpha++;
       //after fully faded in, start fading out
-    } else if (this.switch == 0 && this.alpha >= 300) {
+    } else if (this.switch == 0 && this.alpha >= 30) {
       this.alpha = 100;
-      this.switch = 1;
+      this.switch = 2;
     }
     //fading out logic for other than intro
-    if (this.switch == 1 && this.alpha > 0) {
+    if (this.switch == 2 && this.alpha > 0) {
       this.alpha--;
     } else if (this.switch == 1 && this.alpha <= 0) {
       this.alpha = 0;
