@@ -33,72 +33,86 @@ let dragStrokeWeight;
 //CREATE LIST OF POSITIONS ON JAMBOARD
 
 let messageList = [
-"click around the edges of screen",
+// "click around the edges of screen",
   "this \n is \n Neti-neti",
   "this is a circle",
   "a circle is a metaphor", 
-   "a metaphor is a \n non-literal \n use of a \n word, \n image, \n or action ",
+   "a metaphor is a \n non-literal \n use of a \n word, \n image, \n or action",
    "a habit is a circle",
-   "what habit is unfolding?",
+   "how does \n your mind move \n when it wanders?",
+  //  "what habit is unfolding?",
+   "this is a ripple",
+   "a ripple is evidence \n of change \n spreading \n through someone \n or something",
    "this is a mirror",
    "a mirror is \n an instrument \n of qualitative reciprocation",
-   "how is \n your quality reflected?",
-   'this is a dialogue',
-   'a dialogue is an exchange of ideas',
-  'a dialogue is a relationship',
-'a relationship\n is a connection \n between \n two or more things',
-"what is \n the relationship \n between your posture \n and the screen?",
-"this is an invitation",
-"an invitation \n is an action that \n encourages something to happen",
-'clicking, \n tapping and \n dragging \n your mouse \n are encouraged actions',
-"scowling, \n extreme sighing, \n and curling the outer corners \n of your mouth \n downward \n are less encouraged actions",
-"you are invited \n to take action \n outside your habit ",
-  "this is a mandala",
- "a mandala is a \n representation \n of the universe",
- "is a reflection of the moon \n less real \n than the moon itself?",
- "a concept is an abstract construct",
- "this is a concept",
- "is a concept empty of meaning?",
- "what gives shape to \n an unformed thought?",
- "this is a question",
- 'a question is an expression \n inviting speculation',
- 'when will you get to the end of the circle?',
- "this is a trick",
- "a trick \n is an indirect means to gain an end",
- "is your reflection a projection or reflection?",
-"this is a secret",
-  "a secret \n is something \n with an aura \n of mystery ",
-  "do you feel your thoughts \n or think your feelings?",
-  "this is a paradox",
-  "a paradox \n is something \n that combinines \n contradictory qualities \n to reveal something true",
-  "when you sit alone \n in silence \n whose voices do you hear?",
-  "this is a ripple",
-  "a ripple is a \n particular \n effect \n that spreads \n through someone \n or something",
+   "what \n quality does time \ n reflect?",
+   "this is a mandala",
+   "a mandala is a \n representation \n of the universe",
+   "",
   'this is existence',
-'existence is a \n state of animation',
-"does uncertainty have a pace?",
-"where are you \n looking for an answer?",
-"what is the \n rhythym \n of your your ecstasy?",
-'this is an exploration',
-'exploration is a \n roundabout \n approach to discovery',
-'discovery is a value',
-// 'what is the value of an empty circle?',
-'this is a meditation',
-"a meditation \n is intentional \n observation \n of something \n over a period of time",
-"are forgotten memories \n more \n or less \n true\n than dreams \n you remember? ",
-"how do you know \n what you think?",
-"where does \n your mind go \n when it wanders?",
-"how does your body speak?",
-'this is eternity',
-'eternity \n is a state \n to which \n time \nhas no application',
+  'existence is a \n state of animation',
+  'this is eternity',
+'eternity \n is a state \n to which \n time \n has no application',
 'press ESC to capture ETERNITY',
 "this is a boundary",
 'a boundary \n is a line that marks \n the limits\n of an area',
-'what is the boundary of time?',
-'why does it matter?',
-'what separates \n you \n from the universe?',
-"what is the worth of an open question?",
-'what is the \n measure n\ of basic goodness?',
+"this is a concept",
+"",
+'where is \n the boundary of time?',
+"a concept \n is an abstract construct",
+'how do you get to the end of a circle?',
+"this is a question",
+"",
+"is a reflection of the moon \n less real \n than the moon itself?",
+"is your reflection a projection or reflection?",
+"this is a trick",
+"",
+'a question is an expression \n inviting speculation',
+"a trick \n is an indirect means to gain an end",
+"is a \n concept \n void of meaning?",
+"this is a paradox",
+"a paradox \n is something \n that combinines \n contradictory qualities \n to reveal something true",
+"",
+"what gives shape to \n an unformed thought?",
+"",
+'this is a meditation',
+"",
+"a meditation \n is intentional \n observation \n of something \n over a period of time",
+"does uncertainty have a weight?",
+"this is a secret",
+  "a secret \n is something \n with an aura \n of mystery ",
+  "",
+"are forgotten memories \n more \n or less \n true \n than \n remembered dreams? ",
+"how do you know \n what you think?",
+  'this is a dialogue',
+  //  'a dialogue is an exchange of ideas',
+  // 'a dialogue is a relationship',
+// 'a relationship\n is a connection \n between \n two or more things',
+// "what is \n the relationship \n between your posture \n and the screen?",
+"this is an invitation",
+"an invitation \n is an action that \n encourages something to happen",
+// 'clicking, \n tapping and \n dragging \n your mouse \n are encouraged actions',
+// "scowling, \n extreme sighing, \n and curling the outer corners \n of your mouth \n downward \n are less encouraged actions",
+"you are invited \n to take action \n outside your habit ",
+'this is an exploration',
+'exploration is a \n roundabout \n approach to discovery',
+"",
+// 'discovery is a value',
+  // "do you feel your thoughts \n or think your feelings?",
+  // "how does your body speak?",
+  "what is the \n point \n of an open question?",
+ 
+  "what separates \n a truth \n from \n a lie?",
+  "",
+  'what separates \n you \n from the universe?',
+  // "when you sit alone \n in silence \n whose voices do you hear?",
+"at what moment \n does 'before' \n become 'after?",
+"",
+// "where are you \n looking for an answer?",
+// "what is the \n rhythym \n of your your ecstasy?",
+// 'what is the value of an empty form?',
+// 'what is the \n measure n\ of basic goodness?',
+'what makes \n words \n matter?',
 "this is your koan",
 ];
 
@@ -542,7 +556,7 @@ function touchStarted() {
     //     }
     //   }
 
-    // GO HERE TO SEE ANIMATION DISTINCTIONS !!!( change from 0-10) no ,4,6,8,9, maybe 10 LILL 7 9 shrink 8 recolor 10
+    // GO HERE TO SEE ANIMATION DISTINCTIONS !!!( change from 0-10) no ,4,6,8,9, maybe 10 KILL 7 9? shrink 8 recolor 10
     //0 = circle ripples *** slow down, increase stroke weight
     //1 = bubbles radiating outward
     //2= circles radiating downwards ***
@@ -569,7 +583,7 @@ function touchStarted() {
     // }
 
     if (randomNumber == 0) {
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 1; i++) {
         animations.push(new AnimationTouch0(mouseX, mouseY, i));
       }
     }
@@ -618,7 +632,7 @@ function touchStarted() {
     }
     //ANIMATION 6
     else if (randomNumber == 6) {
-      for (let i = 0; i < 25; i++) {
+      for (let i = 0; i < 10; i++) {
         animations.push(new AnimationTouch6(mouseX, mouseY, i));
       }
     }
@@ -679,8 +693,8 @@ class AnimationTouch0 {
     this.maxAlpha = 50;
     this.alpha = random(this.maxAlpha);
     
-    this.switch = 0;
-    this.lifetime = 800;
+    this.switch = 1;
+    this.lifetime = 200;
     this.p = createVector(x, y);
     this.d = random(100);
     this.weight = i + 1;
@@ -693,20 +707,20 @@ class AnimationTouch0 {
       this.switch = 1;
     }
 
-    if (this.switch == 1 && this.alpha > 0) {
+    if (this.switch == 1 && this.alpha > 20) {
       this.alpha--;
     } else if (this.switch == 1 && this.alpha <= 0) {
       this.alpha = 0;
     }
-    this.d += 8;
+    this.d += random(1, 8);
     this.lifetime--;
 
     noFill();
     shapeCol.setAlpha(this.alpha);
-    fill(shapeCol);
-    stroke(shapeCol);
-    strokeWeight(this.weight);
-    strokeWeight(3);
+  fill(shapeCol);
+    stroke("beige");
+     strokeWeight(this.weight);
+    strokeWeight(4);
     circle(this.p.x, this.p.y, this.d);
   }
 }
