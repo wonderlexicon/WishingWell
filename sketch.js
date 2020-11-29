@@ -24,96 +24,102 @@ let lastAnimationFrame;
 let animations = [];
 let messages = [];
 
-let bkCol, shapeCol, goldCol, introTxtCol, circleCol,  introTxtCol2, userTypedColor;
+let bkCol,
+  shapeCol,
+  goldCol,
+  introTxtCol,
+  circleCol,
+  introTxtCol2,
+  userTypedColor;
 
 let dragCircleCol, dragCircleAlpha;
 let dragStrokeWeight;
 
-
-//CREATE LIST OF POSITIONS ON JAMBOARD
+//CREATE LIST OF POSITIONS ON JAMBOARD?
 
 let messageList = [
-// "click around the edges of screen",
+  // "click around the edges of screen",
   "this \n is \n Neti-neti",
   "this is a circle",
-  "a circle is a metaphor", 
-   "a metaphor is a \n non-literal \n use of a \n word, \n image, \n or action",
-   "a habit is a circle",
-   "how does \n your mind move \n when it wanders?",
+  "a circle is a metaphor",
+  "a metaphor is a \n non-literal \n use of a \n word, \n image, \n or action",
+  "a habit is a circle",
+  "how does \n your mind \n move \n when it \n wanders?",
   //  "what habit is unfolding?",
-   "this is a ripple",
-   "a ripple is evidence \n of change \n circulation ",
-   "this is a mirror",
-   "a mirror is \n an instrument \n of qualitative reciprocation",
-   "what \n quality does time \n reflect?",
-   "this is a mandala",
-   "a mandala is a \n representation \n of the universe",
-   "",
-  'this is existence',
-  'existence is a \n state of animation',
-  'this is eternity',
-'eternity \n is a state \n to which \n time \n has no application',
-'press ESC to capture ETERNITY',
-"this is a boundary",
-'a boundary \n is a line that marks \n the limits\n of an area',
-"this is a concept",
-"",
-'where is \n the boundary of time?',
-"a concept \n is an abstract construct",
-'how do you get to the end of a circle?',
-"this is a question",
-"",
-"is a reflection of the moon \n less real \n than the moon itself?",
-"is your reflection a projection or reflection?",
-"this is a trick",
-"",
-'a question is an expression \n inviting speculation',
-"a trick \n is an indirect means to gain an end",
-"is a \n concept \n void of meaning?",
-"this is a paradox",
-"a paradox \n is something \n that combinines \n contradictory qualities \n to reveal something true",
-"",
-"what gives shape to \n an unformed thought?",
-"",
-'this is a meditation',
-"",
-"a meditation \n is intentional \n observation \n of something \n over a period of time",
-"does uncertainty have a weight?",
-"this is a secret",
+  "this is a ripple",
+  "a ripple \n is evidence \n of change in circulation",
+  "this is a mirror",
+  "a mirror is \n an instrument \n of qualitative reciprocation",
+  "what \n quality does time \n reflect?",
+  "this is a mandala",
+  "a mandala is a \n representation \n of the universe",
+  "",
+  "this is existence",
+  "existence is a \n state of animation",
+  "this is eternity",
+  "eternity \n is a state \n to which \n time \n has no application",
+  "touch ESC \n to \n capture \n ETERNITY",
+  "this is a boundary",
+  "a boundary \n is a line \n that marks \n the limits \n of an area",
+  "this is a concept",
+  "",
+  "where is \n the boundary \n of time?",
+  "",
+  "a concept \n is \n an abstract construct",
+  "how do you get to the end \n of \n a circle?",
+  "this is a question",
+  "",
+  "how is \n a reflection of the moon \n different \n than the moon itself?",
+  "is your reflection \n a projection \n or a reflection?",
+  "this is a trick",
+  "",
+  "a question \n is an expression \n inviting speculation",
+  "a trick \n is a \n means \n of indirectly \n realizing an end",
+  "is a \n concept \n void of meaning?",
+  "this is a paradox",
+  "a paradox \n blends \n contradictory qualities \n to uncover \n something true",
+  "",
+  "what gives shape to \n an unformed thought?",
+  "",
+  "this is a meditation",
+  "",
+  "meditation \n is intentional \n observation \n of a chosen object \n over a distinct \n cycle of time",
+  "does uncertainty have a weight?",
+  "this is a secret",
   "a secret \n is something \n with an aura \n of mystery ",
   "",
-"are forgotten memories \n more \n or less \n true \n than \n remembered dreams? ",
-"how do you know \n what you think?",
-  'this is a dialogue',
+  "are forgotten memories \n more \n or less \n true \n than \n remembered dreams? ",
+  "how do you know \n what you think?",
+  "this is a dialogue",
   //  'a dialogue is an exchange of ideas',
   // 'a dialogue is a relationship',
-// 'a relationship\n is a connection \n between \n two or more things',
-// "what is \n the relationship \n between your posture \n and the screen?",
-"this is an invitation",
-"an invitation \n is an action that \n encourages something to happen",
-// 'clicking, \n tapping and \n dragging \n your mouse \n are encouraged actions',
-// "scowling, \n extreme sighing, \n and curling the outer corners \n of your mouth \n downward \n are less encouraged actions",
-"you are invited \n to take action \n outside your habit ",
-'this is an exploration',
-'exploration is a \n roundabout \n approach to discovery',
-"",
-// 'discovery is a value',
+  // 'a relationship\n is a connection \n between \n two or more things',
+  // "what is \n the relationship \n between your posture \n and the screen?",
+  "this is an invitation",
+  "an invitation \n is an action that \n encourages something to happen",
+  // 'clicking, \n tapping and \n dragging \n your mouse \n are encouraged actions',
+  // "scowling, \n extreme sighing, \n and curling the outer corners \n of your mouth \n downward \n are less encouraged actions",
+  "you are invited \n to take action \n outside your habit ",
+  "this is an exploration",
+  "exploration is a \n roundabout \n approach to discovery",
+  "",
+  // 'discovery is a value',
   // "do you feel your thoughts \n or think your feelings?",
   // "how does your body speak?",
   "what is the \n point \n of an open question?",
- 
+
   "what separates \n a truth \n from \n a lie?",
   "",
-  'what separates \n you \n from the universe?',
+  "what separates \n you \n from the universe?",
   // "when you sit alone \n in silence \n whose voices do you hear?",
-"at what moment \n does 'before' \n become 'after?",
-"",
-// "where are you \n looking for an answer?",
-// "what is the \n rhythym \n of your your ecstasy?",
-// 'what is the value of an empty form?',
-// 'what is the \n measure n\ of basic goodness?',
-'what makes \n words \n matter?',
-"this is your koan",
+  "at what moment \n does 'before' \n become 'after?",
+  "",
+  // "where are you \n looking for an answer?",
+  // "what is the \n rhythym \n of your your ecstasy?",
+  // 'what is the value of an empty form?',
+  // 'what is the \n measure n\ of basic goodness?',
+  "what makes \n words \n matter?",
+  "this is your koan"
 ];
 
 let socket = io();
@@ -121,7 +127,7 @@ socket.on("connect", () => {
   console.log("connected!");
 });
 
-let startTime = new Date().getTime()/1000;
+let startTime = new Date().getTime() / 1000;
 // const radius = 100;
 
 function setup() {
@@ -141,7 +147,7 @@ function setup() {
 
   function loadAsset() {
     textFont("Poiret One");
-  
+
     function assetLoaded() {
       // assetCounter++;
       // if(assetCounter == assetNumber) {
@@ -149,7 +155,7 @@ function setup() {
       // }
     }
   }
-   
+
   textAlign(CENTER);
 
   isStarted = false;
@@ -158,30 +164,29 @@ function setup() {
 
   sizeList();
 
-   colorList(100, 100);
+  colorList(100, 100);
   socket.on("data", data => {
     console.log("key: " + data["key"]);
   });
   socket.on("touchData", touchData => {
-    for (let i = 0 ; i<5;i++){
-      // animations.push(new AnimationTouch0(width / 2, height / 2, i));  
-      animations.push(new AnimationTouch7(width/2, height/2, i));  
+    for (let i = 0; i < 5; i++) {
+      // animations.push(new AnimationTouch0(width / 2, height / 2, i));
+      animations.push(new AnimationTouch7(width / 2, height / 2, i));
     }
-   
+
     console.log("touchData:" + touchData);
   });
 }
 
 // txt = intro font color, shapeCol = automated shapes and font, goldCol=user text
 function colorList(R, G, B) {
- 
   // shapeCol = color(H, S, 100);
   shapeCol = color("white");
   goldCol = color("white");
-//  userTypedColor = color("green");
+  //  userTypedColor = color("green");
   // txtCol = color("beige");
   introTxtCol = color("beige");
-  circleCol = color('beige');
+  circleCol = color("beige");
   circleCol.setAlpha(200);
   introTxtCol2 = color(37, 5, 245);
   bkCol = color(0, 0, 17);
@@ -197,200 +202,188 @@ function sizeList() {
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight,);
+  resizeCanvas(windowWidth, windowHeight);
   sizeList();
-
+}
 
 let input = -1;
 let index = 0;
 let dragX;
 let dragY;
 
+let introDurationFrames = 100;
 function introduction() {
-  if (isTapped == true && txtAlpha < 100) {
+  let fadeOutSpeed = .5;
+  let maxAlpha = 300;
+  if (isTapped == true && txtAlpha < maxAlpha) {
     txtAlpha++;
-  } else if (txtAlpha >= 100) {
-    txtAlpha = 100;
+  } else if (txtAlpha >= maxAlpha) {
+    txtAlpha = maxAlpha;
   }
 
   if (isTapped == false && txtAlpha > 0) {
-    txtAlpha -= 5;
+    txtAlpha -= fadeOutSpeed;
   } else if (isTapped == false && txtAlpha < 0) {
     txtAlpha = 0;
   }
 
+  //CIRCLE SIZE CREATE
+  // noFill(circleCol);
+  noStroke();
+  background(bkCol);
+  stroke("beige");
+  strokeWeight(5);
 
-//CIRCLE SIZE CREATE
-// noFill(circleCol);
-noStroke();
-background(bkCol);
-stroke("beige");
-strokeWeight(5);
+  //if I comment this out, then I get the effect I want with my mouse, but I lose my intro text and chaos with most of the animations. If I keep it commented out I lose the mouse drag effect.
 
+  circle(
+    windowWidth / 2,
+    windowHeight / 2,
+    0.9 * min(windowWidth, windowHeight)
+  );
+  if (frameCount > introDurationFrames){
+    isStarted = true;
+  }
+  
 
-//if I comment this out, then I get the effect I want with my mouse, but I lose my intro text and chaos with most of the animations. If I keep it commented out I lose the mouse drag effect. 
-
-circle(
-  windowWidth / 2,
-  windowHeight / 2,
-  0.9 * min(windowWidth, windowHeight)
-);
-isStarted = true;
-
-
-//DRAGGING CIRCLE
+  //DRAGGING CIRCLE
 
   dragCircleAlpha -= 100;
   // dragCircleCol = color(250,248,230);
   dragCircleCol = color(25, 25, 112, 0);
- dragCircleCol.setAlpha(dragCircleAlpha);
- if (dragStrokeWeight > 0) {
-  //  dragStrokeWeight -= 1;
-   strokeWeight(dragStrokeWeight);
-     stroke(25, 25, 12);
+  dragCircleCol.setAlpha(dragCircleAlpha);
+  if (dragStrokeWeight > 0) {
+    //  dragStrokeWeight -= 1;
+    strokeWeight(dragStrokeWeight);
+    stroke(25, 25, 12);
   } else {
-   noStroke();
+    noStroke();
   }
-//  fill(dragCircleCol);
+  //  fill(dragCircleCol);
 
-// if (dragX && dragY) {
+  // if (dragX && dragY) {
   ellipse(dragX, dragY);
-{
- fill(0, 2);
- rect(0, 0, width, height);
+  {
+    fill(0, 2);
+    rect(0, 0, width, height);
 
-// fill(25);
-// noStroke();
-ellipse(mouseX, mouseY, 1, 2);
-
-  
-}
+    // fill(25);
+    // noStroke();
+    ellipse(mouseX, mouseY, 1, 2);
+  }
 }
 function draw() {
   if (isLoading == true) {
- 
-   
     noStroke();
     stroke();
     fill(introTxtCol);
     textSize(h4);
     text("Loading", width / 2, height / 2);
 
-  //   function draw() {
-  //  noStroke();
-  //      background();
-  //     const dirY = (windowWidth / 2 - 0.5) * 4;
-  //     const dirX = (windowHeight / wi2dth - 0.5) * 4;
-  //     directionalLight(2, 2, 2, dirX, dirY, 1);
-  //     translate(5 * radius, 0, 0);
-  //     // sphere(radius);
-  //     // translate(3 * radius, 0, 0);
-  //     // sphere(radius);
-  //   }
-    
+    //   function draw() {
+    //  noStroke();
+    //      background();
+    //     const dirY = (windowWidth / 2 - 0.5) * 4;
+    //     const dirX = (windowHeight / wi2dth - 0.5) * 4;
+    //     directionalLight(2, 2, 2, dirX, dirY, 1);
+    //     translate(5 * radius, 0, 0);
+    //     // sphere(radius);
+    //     // translate(3 * radius, 0, 0);
+    //     // sphere(radius);
+    //   }
 
     noFill();
     stroke(shapeCol);
     arc(
-      width / 2, 
+      width / 2,
       height / 2,
       newSize / 5,
       newSize / 5,
       0,
-      map(assetCounter, 0, assetNumber - 1, 0, )
+      map(assetCounter, 0, assetNumber - 1, 0, TAU)
     );
   } else if (isLoading == false) {
     //  let currentTime = new Date ().getTime()/1000;
     // if (currentTime - startTime < 120){
     //   console.log(frameCount);
     // }
-    
-   
+
     introduction();
 
+    if (isPlayScreen == true && frameCount % 300 == 0) {
+      input < messageList.length ? input++ : (input = 0);
+      // messages.push(new MessageCustom("nicoleta", width/2, height/2));
+      // messages.push(new Message1(input));
+      messages.push(
+        new MessageCustom(messageList[input], width / 2, height / 2, 600)
+      );
+    }
 
-  if (isPlayScreen == true && frameCount % 300 == 0) {
-    input < messageList.length ? input++ : (input = 0);
-    // messages.push(new MessageCustom("nicoleta", width/2, height/2));
-    // messages.push(new Message1(input));
-    messages.push(
-      new MessageCustom(messageList[input], width / 2, height / 2, 600)
-    );
-  }
+    //Random loop of text through message list
 
-  
+    //   if(isPlayScreen == true && frameCount % 300 == 0){
+    //     let myText = messageList[index];
+    //     let textX = random(0, width);
+    //     //MAKE SURE TEXT AND TEXT Y ARE > 0
+    //     // let textX = width/4-200;
+    //     // let textY = height/4;
+    //     let textY = random(0, height);
+    //     let textLifetime = 60;
+    //     messages.push(new MessageCustom(myText, textX, textY, textLifetime));
+    // index++;
+    //   }
 
-  //Random loop of text through message list
+    //RANDOM WORD REPEAT horizontal line on top (only random x)
+    // if(isPlayScreen == true && frameCount % 10 == 0){
+    //   let myText = "nIcoleta";
+    //   let textX = random(0, width);
+    //   //MAKE SURE TEXT AND TEXT Y ARE > 0
+    //   // let textX = width/4-200;
+    //   let textY = height/4;
+    //   messages.push(new MessageCustom(myText, textX, textY));
+    // }
 
-  //   if(isPlayScreen == true && frameCount % 300 == 0){
-  //     let myText = messageList[index];
-  //     let textX = random(0, width);
-  //     //MAKE SURE TEXT AND TEXT Y ARE > 0
-  //     // let textX = width/4-200;
-  //     // let textY = height/4;
-  //     let textY = random(0, height);
-  //     let textLifetime = 60;
-  //     messages.push(new MessageCustom(myText, textX, textY, textLifetime));
-  // index++;
-  //   }
+    //random word repeat x,y around the screen
+    // if(isPlayScreen == true && frameCount % 10 == 0){
+    //   let myText = "nIcoleta";
+    //   let textX = random(0, width);
+    //   //MAKE SURE TEXT AND TEXT Y ARE > 0
+    //   // let textX = width/4-200;
+    //   // let textY = height/4;
+    //   let textY = random(0, height);
+    //   messages.push(new MessageCustom(myText, textX, textY));
+    // }
 
-  //RANDOM WORD REPEAT horizontal line on top (only random x)
-  // if(isPlayScreen == true && frameCount % 10 == 0){
-  //   let myText = "nIcoleta";
-  //   let textX = random(0, width);
-  //   //MAKE SURE TEXT AND TEXT Y ARE > 0
-  //   // let textX = width/4-200;
-  //   let textY = height/4;
-  //   messages.push(new MessageCustom(myText, textX, textY));
-  // }
+    if (animations.length > 0) {
+      for (let i = 0; i < animations.length; i++) {
+        push();
+        animations[i].draw();
+        pop();
 
-  //random word repeat x,y around the screen
-  // if(isPlayScreen == true && frameCount % 10 == 0){
-  //   let myText = "nIcoleta";
-  //   let textX = random(0, width);
-  //   //MAKE SURE TEXT AND TEXT Y ARE > 0
-  //   // let textX = width/4-200;
-  //   // let textY = height/4;
-  //   let textY = random(0, height);
-  //   messages.push(new MessageCustom(myText, textX, textY));
-  // }
-
-
-  if (animations.length > 0) {
-    for (let i = 0; i < animations.length; i++) {
-      push();
-      animations[i].draw();
-      pop();
-
-      if (animations[i].lifetime < 0) {
-        animations.splice(i--, 1);
+        if (animations[i].lifetime < 0) {
+          animations.splice(i--, 1);
+        }
       }
     }
-  }
 
-  if (messages.length > 0) {
-    for (let i = 0; i < messages.length; i++) {
-      messages[i].draw();
-      if (messages[i].lifetime < 0) {
-        messages.splice(i, 1);
+    if (messages.length > 0) {
+      for (let i = 0; i < messages.length; i++) {
+        messages[i].draw();
+        if (messages[i].lifetime < 0) {
+          messages.splice(i, 1);
+        }
       }
     }
+
+    //  noStroke();
+    //  fill(255);
+    //  textSize(h1);
+    //  text(messageList[0], width / 2, height / 2-h1);
+    //  textSize(h3);
+    //  text(messageList[4], width / 2, height / 2 + h1*2);
   }
 
-  //  noStroke();
-  //  fill(255);
-  //  textSize(h1);
-  //  text(messageList[0], width / 2, height / 2-h1);
-  //  textSize(h3);
-  //  text(messageList[4], width / 2, height / 2 + h1*2);
-}
-
-
-
-//INTRO TEXT GROUP
-
-
-
+  //INTRO TEXT GROUP
 
   //INTRO TEXT SETUP
 
@@ -401,12 +394,11 @@ function draw() {
   text(introTextList[0], width / 2, height / 2 - h1 * 4.5);
   // text(introTextList[2], width/2, height/2-h3*2);
 
-  textSize(h2); 
+  textSize(h2);
   // introTxtCol.setAlpha(txtAlpha-200);
   fill(introTxtCol2);
   text(introTextList[2], width / 2, height / 2 - h1 * 2);
   text(introTextList[4], width / 2, height / 2 + h1);
-  
 
   textSize(h3);
   // text(introTextList[1], width / 2, height / 2 - h1 * 2.5);
@@ -416,7 +408,6 @@ function draw() {
   textSize(h4);
   text(introTextList[1], width / 2, height / 2 + h1 * 4);
   // text(introTextList[5], width/2, height/2);
-
 }
 
 let introTextList = [
@@ -424,99 +415,100 @@ let introTextList = [
   "",
   "right now",
   "",
-  "",
-  ];
-  
-  
+  ""
+];
 
 let textShowTime;
-  if (isPlayScreen == true) {
-    // console.log(frameCount);
-    textShowTime = 25;
-    if (frameCount == textShowTime) {
-      let myText = "YO";
+if (isPlayScreen == true) {
+  // console.log(frameCount);
+  textShowTime = 25;
+  if (frameCount == textShowTime) {
+    let myText = "YO";
 
-      let textX = 200;
+    let textX = 200;
 
-      //POSITION TEXT - MAKE SURE TEXT AND TEXT Y ARE > 0
-      // let textX = width/4-200;
-      // let textY = height/4;
-      let textY = 300;
-      let textLifetime = 600;
-      messages.push(new MessageCustom(myText, textX, textY, textLifetime));
-    }
-
-    textShowTime = 100;
-    if (frameCount == textShowTime) {
-      let myText = "OUTSIDE";
-
-      let textX = 400;
-
-      //POSITION TEXT - MAKE SURE TEXT AND TEXT Y ARE > 0
-      // let textX = width/4-200;
-      // let textY = height/4;
-      let textY = 300;
-      let textLifetime = 60;
-      messages.push(new MessageCustom(myText, textX, textY, textLifetime));
-    }
-
-    textShowTime = 2000;
-    if (frameCount == textShowTime) {
-      let myText = "BULLSHIT";
-
-      let textX = windowWidth - 200;
-
-      //POSITION TEXT - MAKE SURE TEXT AND TEXT Y ARE > 0
-      // let textX = width/4-200;
-      // let textY = height/4;
-      let textY = 300;
-      let textLifetime = 30;
-      messages.push(new MessageCustom(myText, textX, textY, textLifetime));
-    }
-
-    textShowTime = 6000;
-    if (frameCount == textShowTime) {
-      let myText = "TRUTH";
-
-      let textX = windowWidth - 300;
-
-      //POSITION TEXT - MAKE SURE TEXT AND TEXT Y ARE > 0
-      // let textX = width/4-200;
-      // let textY = height/4;
-      let textY = 300;
-      let textLifetime = 30;
-      messages.push(new MessageCustom(myText, textX, textY, textLifetime));
-    }
-    // let textShowTime =1000;
-    // if (frameCount == textShowTime){
-    //   let myText = "simon?";
-
-    //   let textX = 200;
-    //   //MAKE SURE TEXT AND TEXT Y ARE > 0
-    //   // let textX = width/4-200;
-    //   // let textY = height/4;
-    //   let textY = 200;
-    //   let textLifetime = 600;
-    //   messages.push(new MessageCustom(myText, textX, textY, textLifetime));
-
-    //   }
+    //POSITION TEXT - MAKE SURE TEXT AND TEXT Y ARE > 0
+    // let textX = width/4-200;
+    // let textY = height/4;
+    let textY = 300;
+    let textLifetime = 600;
+    messages.push(new MessageCustom(myText, textX, textY, textLifetime));
   }
 
+  textShowTime = 100;
+  if (frameCount == textShowTime) {
+    let myText = "OUTSIDE";
+
+    let textX = 400;
+
+    //POSITION TEXT - MAKE SURE TEXT AND TEXT Y ARE > 0
+    // let textX = width/4-200;
+    // let textY = height/4;
+    let textY = 300;
+    let textLifetime = 60;
+    messages.push(new MessageCustom(myText, textX, textY, textLifetime));
+  }
+
+  textShowTime = 2000;
+  if (frameCount == textShowTime) {
+    let myText = "BULLSHIT";
+
+    let textX = windowWidth - 200;
+
+    //POSITION TEXT - MAKE SURE TEXT AND TEXT Y ARE > 0
+    // let textX = width/4-200;
+    // let textY = height/4;
+    let textY = 300;
+    let textLifetime = 30;
+    messages.push(new MessageCustom(myText, textX, textY, textLifetime));
+  }
+
+  textShowTime = 6000;
+  if (frameCount == textShowTime) {
+    let myText = "TRUTH";
+
+    let textX = windowWidth - 300;
+
+    //POSITION TEXT - MAKE SURE TEXT AND TEXT Y ARE > 0
+    // let textX = width/4-200;
+    // let textY = height/4;
+    let textY = 300;
+    let textLifetime = 30;
+    messages.push(new MessageCustom(myText, textX, textY, textLifetime));
+  }
+  // let textShowTime =1000;
+  // if (frameCount == textShowTime){
+  //   let myText = "simon?";
+
+  //   let textX = 200;
+  //   //MAKE SURE TEXT AND TEXT Y ARE > 0
+  //   // let textX = width/4-200;
+  //   // let textY = height/4;
+  //   let textY = 200;
+  //   let textLifetime = 600;
+  //   messages.push(new MessageCustom(myText, textX, textY, textLifetime));
+
+  //   }
+}
+
 function mouseDragged() {
-   background (bkCol);
+  background(bkCol);
   console.log("dragging?");
   dragX = mouseX;
   dragY = mouseY;
   dragCircleAlpha = 100;
   dragStrokeWeight = 1;
   animations.push(new AnimationDragged(mouseX, mouseY));
- 
 
   // prevent default
   return false;
 }
 
 function touchStarted() {
+ 
+  if (frameCount < introDurationFrames){
+    return;
+  }
   if (isStarted == true) {
     isTapped = false;
   }
@@ -525,10 +517,8 @@ function touchStarted() {
     isPlayScreen = true;
   }
 
-
   if (isPlayScreen == true) {
     colorList(100, 100);
-
 
     if (mouseY < height / 10) {
       for (let i = 0; i < 55; i++) {
@@ -543,7 +533,6 @@ function touchStarted() {
     } else if (mouseX > (width / 10) * 9) {
       for (let i = 0; i < 5; i++) {
         // animations.push(new AnimationRight(i));
-   
       }
     }
 
@@ -567,7 +556,6 @@ function touchStarted() {
     //7
 
     //clicktop = rain, click left outward dots, click bottom = quiet radiance, click right?
-  
 
     let coolDownTime = 50;
     if (lastAnimationFrame > frameCount - coolDownTime) {
@@ -575,23 +563,22 @@ function touchStarted() {
     }
     lastAnimationFrame = frameCount;
     socket.emit("touchData", { mouseX: mouseX, mouseY: mouseY });
-   
-// randomNumber = 0
-      randomNumber = floor(random(10));
+
+    randomNumber = 0;
+    // randomNumber = floor(random(10));
     //ANIMATION0
     // for(let i = 0; i < 3; i++){
     //   animations.push(new AnimationTouch0(mouseX, mouseY, i));
     // }
 
     if (randomNumber == 0) {
-      let numRipples = 5;
+      let numRipples = 3;
 
       for (let i = 0; i < numRipples; i++) {
         animations.push(new AnimationTouch0(mouseX, mouseY, i));
       }
     }
 
- 
     //ANIMATION1
     else if (randomNumber == 1) {
       //   // Add an initial set of boids into the system
@@ -621,10 +608,9 @@ function touchStarted() {
     }
 
     // //ANIMATION4
-     else if (randomNumber == 4) {
-
-     animations.push(new AnimationTouch4(mouseY));
-     }
+    else if (randomNumber == 4) {
+      animations.push(new AnimationTouch4(mouseY));
+    }
 
     //ANIMATION 5
     else if (randomNumber == 5) {
@@ -657,7 +643,6 @@ function touchStarted() {
       }
     }
 
-   
     console.log("new AnimationTouch" + randomNumber);
   }
 }
@@ -672,21 +657,22 @@ function keyTyped() {
     text("Loading", width / 2, height / 2);
     socket.emit("data", { key: key });
 
-//     if (userTypedMessage === null) {
+    //     if (userTypedMessage === null) {
 
-//       userTypedMessage = new AnimationType(key);
-//       animations.push(userTypedMessage);
-//     } else {
-//       userTypedMessage.myMessage = userTypedMessage.myMessage + key;
-//     }
-//      fill (userTypedColor);
+    //       userTypedMessage = new AnimationType(key);
+    //       animations.push(userTypedMessage);
+    //     } else {
+    //       userTypedMessage.myMessage = userTypedMessage.myMessage + key;
+    //     }
+    //      fill (userTypedColor);
     // colorList(floor(random(360)), 100);
   }
 }
 
-
 function keyPressed() {
-  if (keyCode === ESCAPE) {
+  let ESCMessageIndex = 18;
+  
+  if (keyCode === ESCAPE && input != ESCMessageIndex) {
     saveCanvas("ETERNITY IS NOW.", "png");
   }
 }
@@ -695,7 +681,7 @@ class AnimationTouch0 {
   constructor(x, y, i) {
     this.maxAlpha = 50;
     this.alpha = random(this.maxAlpha);
-    
+
     this.switch = 1;
     this.lifetime = 300;
     this.p = createVector(x, y);
@@ -720,9 +706,9 @@ class AnimationTouch0 {
 
     noFill();
     shapeCol.setAlpha(this.alpha);
-  fill(shapeCol);
+    fill(shapeCol);
     stroke("beige");
-     strokeWeight(this.weight);
+    strokeWeight(this.weight);
     strokeWeight(4);
     circle(this.p.x, this.p.y, this.d);
   }
@@ -1200,31 +1186,29 @@ class AnimationCenter2 {
 }
 class AnimationDragged {
   constructor(x, y) {
-    this.x=x;
-    this.y=y;
-    this.alpha = (80);
+    this.x = x;
+    this.y = y;
+    this.alpha = 80;
     // this.switch = 1;
     this.lifetime = 100;
     this.cell = width / 40;
     // this.p = createVector(i * this.cell + this.cell / 2, 0);
-    this.d = (.5, 4);
-  
+    this.d = (0.5, 4);
   }
-  draw(){
+  draw() {
     let mouseDragCol = color("white");
-mouseDragCol.setAlpha(this.alpha);
+    mouseDragCol.setAlpha(this.alpha);
     fill(mouseDragCol);
     let circleSize = 20;
     noStroke();
     circle(this.x, this.y, circleSize);
     // this.alpha++;
     // this.switch = 0;
-   
+
     // this.a += 0.04;
-let fadeOutRate = 2;
+    let fadeOutRate = 2;
 
-
-     this.alpha -= fadeOutRate;
+    this.alpha -= fadeOutRate;
 
     // if (this.switch == 1 && this.alpha > 0) {
     //   this.alpha -= 0.5;
@@ -1246,7 +1230,6 @@ let fadeOutRate = 2;
     }
 
     // circle(sin(this.a * this.v.y) * 3 + this.p.x, this.p.y, this.d);
-
   }
 }
 class AnimationTop {
@@ -1256,7 +1239,7 @@ class AnimationTop {
     this.lifetime = 200;
     this.cell = width / 40;
     this.p = createVector(i * this.cell + this.cell / 2, 0);
-    this.d = random(.5, 6);
+    this.d = random(0.5, 6);
     this.v = createVector(0, random(10));
   }
   draw() {
@@ -1336,7 +1319,7 @@ class AnimationLeft {
     this.switch = 0;
     this.lifetime = 300;
     this.cell = height / 20;
-    this.d = random(.5, 8);
+    this.d = random(0.5, 8);
     this.p = createVector(this.d / 2, i * this.cell + this.cell / 2);
     this.v = createVector(random(0.5, 8), 0);
   }
@@ -1401,7 +1384,7 @@ class AnimationRight {
     this.lifetime--;
     noStroke();
     shapeCol.setAlpha(this.alpha);
-   strokeWeight(2);
+    strokeWeight(2);
     fill("beige");
     circle(this.p.x, this.p.y, this.cell / 4);
   }
@@ -1450,7 +1433,7 @@ class Message1 {
     this.topText = messageList[input + 2];
     this.bottomText = messageList[input - 2];
 
-    this.message = 2
+    this.message = 2;
   }
 
   //
