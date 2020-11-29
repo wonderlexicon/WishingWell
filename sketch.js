@@ -42,7 +42,7 @@ let messageList = [
    "how does \n your mind move \n when it wanders?",
   //  "what habit is unfolding?",
    "this is a ripple",
-   "a ripple is evidence \n of change \n spreading \n through someone \n or something",
+   "a ripple is evidence \n of change \n circulation ",
    "this is a mirror",
    "a mirror is \n an instrument \n of qualitative reciprocation",
    "what \n quality does time \n reflect?",
@@ -53,7 +53,7 @@ let messageList = [
   'existence is a \n state of animation',
   'this is eternity',
 'eternity \n is a state \n to which \n time \n has no application',
-'press ESC at any time to capture ETERNITY',
+'press ESC to capture ETERNITY',
 "this is a boundary",
 'a boundary \n is a line that marks \n the limits\n of an area',
 "this is a concept",
@@ -199,7 +199,7 @@ function sizeList() {
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight,);
   sizeList();
-}
+
 
 let input = -1;
 let index = 0;
@@ -297,7 +297,7 @@ function draw() {
       newSize / 5,
       newSize / 5,
       0,
-      map(assetCounter, 0, assetNumber - 1, 0, TAU)
+      map(assetCounter, 0, assetNumber - 1, 0, )
     );
   } else if (isLoading == false) {
     //  let currentTime = new Date ().getTime()/1000;
@@ -576,15 +576,15 @@ function touchStarted() {
     lastAnimationFrame = frameCount;
     socket.emit("touchData", { mouseX: mouseX, mouseY: mouseY });
    
-randomNumber = 0
-    // randomNumber = floor(random(10));
+// randomNumber = 0
+      randomNumber = floor(random(10));
     //ANIMATION0
     // for(let i = 0; i < 3; i++){
     //   animations.push(new AnimationTouch0(mouseX, mouseY, i));
     // }
 
     if (randomNumber == 0) {
-      let numRipples = 3;
+      let numRipples = 5;
 
       for (let i = 0; i < numRipples; i++) {
         animations.push(new AnimationTouch0(mouseX, mouseY, i));
